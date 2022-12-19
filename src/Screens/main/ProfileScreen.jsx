@@ -1,17 +1,23 @@
 import { View, Text, StyleSheet } from "react-native";
 
+import { Background } from "../../Components";
+
 export default function ProfileScreen() {
   return (
-    <View style={styles.container}>
-      <Text>Profile Screen</Text>
-    </View>
+    <Background>
+      <View style={styles.wrapper}></View>
+    </Background>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
+  wrapper: {
     alignItems: "center",
+    paddingTop: 92,
+
+    backgroundColor: "#FFFFFF",
+
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
   },
 });
