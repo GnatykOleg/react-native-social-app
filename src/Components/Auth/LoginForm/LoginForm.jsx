@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
-import { windowDimensions } from "../../../services";
+import { windowDimensions, keyboardShow } from "../../../services";
 
 import { PrimaryButton, PrimaryLink, CustomTextInput } from "../../index";
 
@@ -13,14 +13,15 @@ const initialState = {
   password: "",
 };
 
-export default function LoginForm({ isShowKeyboard, navigateTo }) {
+export default function LoginForm({ navigateTo }) {
   const [state, setState] = useState(initialState);
 
   const { password, email } = state;
 
   const dimensions = windowDimensions();
+  const isShowKeyboard = keyboardShow();
 
-  const { title, wrapper, form, showPassword, showPasswordText } = styles;
+  const { title, form, showPassword, showPasswordText } = styles;
 
   const onFormSubmit = () => {
     // if (email.trim() === "") {
@@ -112,6 +113,5 @@ const styles = StyleSheet.create({
 });
 
 LoginForm.propTypes = {
-  isShowKeyboard: PropTypes.bool,
   navigateTo: PropTypes.object,
 };

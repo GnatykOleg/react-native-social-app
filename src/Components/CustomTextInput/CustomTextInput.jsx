@@ -1,5 +1,6 @@
-import { TextInput, StyleSheet } from "react-native";
 import { useState } from "react";
+import { TextInput, StyleSheet } from "react-native";
+
 import PropTypes from "prop-types";
 
 export default function CustomTextInput({

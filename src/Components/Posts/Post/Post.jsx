@@ -2,7 +2,7 @@ import { View, Image, Text, StyleSheet } from "react-native";
 
 import { EvilIcons } from "@expo/vector-icons";
 
-import { windowDimensions } from "../../services";
+import { windowDimensions } from "../../../services";
 
 export default function Post() {
   const dimensions = windowDimensions();
@@ -17,18 +17,16 @@ export default function Post() {
     location,
     locationText,
     description,
-    imageContainer,
   } = styles;
 
   return (
     <View style={{ ...posts, width: dimensions }}>
-      {/* POST */}
       <View style={post}>
         <Image
           style={image}
           height={240}
           width="100%"
-          source={require("../../../assets/Images/gallery-image.jpg")}
+          source={require("../../../../assets/Images/gallery-image.jpg")}
         />
 
         <Text style={imageTitle}>The Forest</Text>
@@ -45,7 +43,6 @@ export default function Post() {
           </View>
         </View>
       </View>
-      {/* POST */}
     </View>
   );
 }

@@ -1,8 +1,8 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import { ProfileScreen, PostsScreen, CreatePostsScreen } from "../index";
-
 import { MaterialCommunityIcons, AntDesign, Feather } from "@expo/vector-icons";
+
+import { ProfileScreen, PostsScreen, CreatePostsScreen } from "../index";
 
 export default function Home() {
   const Tab = createBottomTabNavigator();
@@ -15,10 +15,6 @@ export default function Home() {
         tabBarActiveTintColor: "#fff",
         tabBarActiveBackgroundColor: "#FF6C00",
         headerShown: false,
-        tabBarItemStyle: {
-          // borderRadius: 100,
-          // paddingBottom: 20,
-        },
       }}
     >
       <Tab.Screen
@@ -34,6 +30,7 @@ export default function Home() {
         name="Posts"
         component={PostsScreen}
       />
+
       <Tab.Screen
         options={{
           tabBarIcon: ({ color, size }) => (

@@ -1,11 +1,15 @@
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-
 import { useState } from "react";
+import { View, Text, StyleSheet } from "react-native";
+import { AntDesign, Entypo, EvilIcons } from "@expo/vector-icons";
+
+import {
+  Header,
+  PrimaryButton,
+  CustomTextInput,
+  Photo,
+} from "../../Components";
 
 import { windowDimensions } from "../../services";
-import { Header, PrimaryButton, CustomTextInput } from "../../Components";
-
-import { AntDesign, Entypo, EvilIcons } from "@expo/vector-icons";
 
 const initialState = {
   name: "",
@@ -18,14 +22,10 @@ export default function PostsScreen() {
   const dimensions = windowDimensions();
 
   const { name, location } = state;
-
   const {
     container,
     title,
-    camera,
-    iconContainer,
-    cameraTitle,
-    cameraWrapper,
+
     form,
   } = styles;
 
@@ -37,20 +37,15 @@ export default function PostsScreen() {
       </Header>
 
       <View style={container}>
-        <View style={cameraWrapper}>
-          <View style={{ ...camera, width: dimensions }}>
-            <TouchableOpacity
-              onPress={() => {}}
-              activeOpacity={0.8}
-              style={iconContainer}
-            >
-              <Entypo name="camera" size={24} color="#BDBDBD" />
-            </TouchableOpacity>
-          </View>
-          <Text style={cameraTitle}>Upload photo</Text>
-        </View>
+        <Photo />
 
-        <View style={{ ...form, width: dimensions }}>
+        <View
+          style={{
+            ...form,
+            // paddingBottom: isShowKeyboard ? 32 : 65,
+            width: dimensions,
+          }}
+        >
           <CustomTextInput
             isPrimaryInput={false}
             onChangeText={(value) => {
@@ -106,43 +101,6 @@ const styles = StyleSheet.create({
     fontSize: 17,
 
     color: "#212121",
-  },
-
-  cameraWrapper: {
-    // alignItems: "center",
-  },
-
-  camera: {
-    justifyContent: "center",
-    alignItems: "center",
-
-    height: 240,
-
-    borderRadius: 8,
-
-    backgroundColor: "#E8E8E8",
-  },
-
-  cameraTitle: {
-    marginTop: 8,
-    marginBottom: 32,
-
-    fontFamily: "Roboto-Regular",
-    fontStyle: "normal",
-
-    fontSize: 16,
-
-    color: "#BDBDBD",
-  },
-
-  iconContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-
-    backgroundColor: "#fff",
-    width: 60,
-    height: 60,
-    borderRadius: 50,
   },
 
   form: {},

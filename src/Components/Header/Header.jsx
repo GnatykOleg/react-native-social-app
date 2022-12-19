@@ -4,8 +4,6 @@ import { windowDimensions } from "../../services";
 import PropTypes from "prop-types";
 
 export default function Header({ children }) {
-  // Variables
-
   const dimensions = windowDimensions();
   const { header, headerContent } = styles;
 
