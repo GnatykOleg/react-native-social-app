@@ -1,89 +1,84 @@
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { useState, useEffect } from "react";
+import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import { AntDesign, Entypo } from "@expo/vector-icons";
 
-import { useState } from "react";
+import { Header, AddPhoto, CreatePostForm } from "../../Components";
+
+import * as Location from "expo-location";
+
+import { Camera } from "expo-camera";
 
 import { windowDimensions } from "../../services";
-import { Header, PrimaryButton, CustomTextInput } from "../../Components";
-
-import { AntDesign, Entypo, EvilIcons } from "@expo/vector-icons";
-
-const initialState = {
-  name: "",
-  location: "",
-};
-
-export default function PostsScreen() {
-  const [state, setState] = useState(initialState);
+export default function PostsScreen({ navigation }) {
+  const [photo, setPhoto] = useState(false);
+  const [snap, setSnap] = useState(null);
+  const [showCamera, setShowCamera] = useState(true);
 
   const dimensions = windowDimensions();
+  const { container } = styles;
+  const { camera, iconContainer, cameraTitle, cameraWrapper, photoContainer } =
+    stylesCamera;
 
-  const { name, location } = state;
+  // useEffect(() => {
+  //   (async () => {
+  //     let { status } = await Location.requestForegroundPermissionsAsync();
+  //     console.log("status", status);
+  //     if (status !== "granted") {
+  //       return console.log("Permission to access location was denied");
+  //     }
+  //   })();
+  // }, []);
 
-  const {
-    container,
-    title,
-    camera,
-    iconContainer,
-    cameraTitle,
-    cameraWrapper,
-    form,
-  } = styles;
+  const takePhoto = async () => {
+    try {
+      const { uri } = await snap.takePictureAsync();
+
+      // const location = await Location.getCurrentPositionAsync();
+      // console.log("Location", location);
+      // console.log(uri);
+      setShowCamera(false);
+      setPhoto(uri);
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
 
   return (
     <>
-      <Header>
-        <AntDesign name="arrowleft" size={24} color="rgba(33, 33, 33, 0.8)" />
-        <Text style={title}>Create a post</Text>
-      </Header>
-
       <View style={container}>
         <View style={cameraWrapper}>
-          <View style={{ ...camera, width: dimensions }}>
-            <TouchableOpacity
-              onPress={() => {}}
-              activeOpacity={0.8}
-              style={iconContainer}
-            >
-              <Entypo name="camera" size={24} color="#BDBDBD" />
-            </TouchableOpacity>
-          </View>
-          <Text style={cameraTitle}>Upload photo</Text>
-        </View>
-
-        <View style={{ ...form, width: dimensions }}>
-          <CustomTextInput
-            isPrimaryInput={false}
-            onChangeText={(value) => {
-              setState((prevState) => ({ ...prevState, name: value }));
-            }}
-            value={name}
-            placeholder="Name..."
-          />
-
-          <View>
-            <CustomTextInput
-              paddingLeft={28}
-              isPrimaryInput={false}
-              onChangeText={(value) => {
-                setState((prevState) => ({ ...prevState, location: value }));
-              }}
-              value={location}
-              placeholder="Location..."
-              marginBottom={32}
-            />
-            <View
-              style={{
-                position: "absolute",
-                left: 0,
-                top: 16,
-              }}
-            >
-              <EvilIcons name="location" size={24} color="#BDBDBD" />
+          {photo && (
+            <View style={{ ...photoContainer, width: dimensions }}>
+              <Image source={{ uri: photo }} style={{ height: 240 }} />
             </View>
-          </View>
+          )}
 
-          <PrimaryButton text="Publish" onPress={() => {}} />
+          {showCamera && (
+            <Camera ref={setSnap} style={{ ...camera, width: dimensions }}>
+              <TouchableOpacity
+                onPress={takePhoto}
+                activeOpacity={0.8}
+                style={iconContainer}
+              >
+                <Entypo name="camera" size={24} color="#BDBDBD" />
+              </TouchableOpacity>
+            </Camera>
+          )}
+
+          <TouchableOpacity
+            onPress={() => {
+              setShowCamera(true);
+              setPhoto(false);
+            }}
+          >
+            <Text style={cameraTitle}>
+              {photo ? "Change photo" : "Upload photo"}
+            </Text>
+          </TouchableOpacity>
         </View>
+        {/* <AddPhoto /> */}
+        {/* Это временно без редакса прокидываю фото так как AddPhoto вообще это отдельный компонент */}
+        <CreatePostForm navigateTo={navigation} photo={photo} />
       </View>
     </>
   );
@@ -107,7 +102,9 @@ const styles = StyleSheet.create({
 
     color: "#212121",
   },
+});
 
+const stylesCamera = StyleSheet.create({
   cameraWrapper: {
     // alignItems: "center",
   },
@@ -136,14 +133,14 @@ const styles = StyleSheet.create({
   },
 
   iconContainer: {
+    zIndex: 999,
     justifyContent: "center",
     alignItems: "center",
 
-    backgroundColor: "#fff",
     width: 60,
     height: 60,
     borderRadius: 50,
   },
 
-  form: {},
+  photoContainer: {},
 });

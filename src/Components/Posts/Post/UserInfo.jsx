@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, Image } from "react-native";
 
-import { windowDimensions } from "../../services";
+import { windowDimensions } from "../../../services";
 
 export default function UserInfo() {
   const dimensions = windowDimensions();
@@ -9,7 +9,7 @@ export default function UserInfo() {
     <View style={{ ...user, width: dimensions }}>
       <Image
         style={avatar}
-        source={require("../../../assets/Images/avatar.png")}
+        source={require("../../../../assets/Images/avatar.png")}
       />
 
       <View>

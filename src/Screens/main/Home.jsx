@@ -1,10 +1,17 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
+import { TouchableOpacity } from "react-native";
+
+import {
+  MaterialCommunityIcons,
+  AntDesign,
+  Feather,
+  MaterialIcons,
+} from "@expo/vector-icons";
+
 import { ProfileScreen, PostsScreen, CreatePostsScreen } from "../index";
 
-import { MaterialCommunityIcons, AntDesign, Feather } from "@expo/vector-icons";
-
-export default function Home() {
+export default function Home({ navigation }) {
   const Tab = createBottomTabNavigator();
 
   return (
@@ -14,15 +21,18 @@ export default function Home() {
         tabBarShowLabel: false,
         tabBarActiveTintColor: "#fff",
         tabBarActiveBackgroundColor: "#FF6C00",
-        headerShown: false,
-        tabBarItemStyle: {
-          // borderRadius: 100,
-          // paddingBottom: 20,
-        },
+        headerTitleAlign: "center",
+        tabBarStyle: { height: 50 },
       }}
     >
       <Tab.Screen
         options={{
+          title: "Publications",
+          headerRight: () => (
+            <TouchableOpacity style={{ paddingRight: 10 }} onPress={() => {}}>
+              <MaterialIcons name="logout" size={24} color="#BDBDBD" />
+            </TouchableOpacity>
+          ),
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons
               name="view-gallery"
@@ -34,8 +44,22 @@ export default function Home() {
         name="Posts"
         component={PostsScreen}
       />
+
       <Tab.Screen
         options={{
+          title: "Create Post",
+          headerLeft: () => (
+            <TouchableOpacity
+              style={{ paddingLeft: 10 }}
+              onPress={() => navigation.goBack()}
+            >
+              <AntDesign
+                name="arrowleft"
+                size={24}
+                color="rgba(33, 33, 33, 0.8)"
+              />
+            </TouchableOpacity>
+          ),
           tabBarIcon: ({ color, size }) => (
             <AntDesign name="plus" size={size} color={color} />
           ),
@@ -45,6 +69,7 @@ export default function Home() {
       />
       <Tab.Screen
         options={{
+          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <Feather name="user" size={size} color={color} />
           ),

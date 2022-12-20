@@ -1,6 +1,6 @@
-import { Dimensions } from "react-native";
-
 import { useState, useEffect } from "react";
+
+import { Dimensions } from "react-native";
 
 export default function windowDimensions() {
   const [dimensions, setDimensions] = useState(

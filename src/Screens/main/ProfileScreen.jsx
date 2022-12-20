@@ -1,11 +1,29 @@
-import { View, Text, StyleSheet } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Keyboard,
+  TouchableWithoutFeedback,
+  TouchableOpacity,
+} from "react-native";
 
-import { Background } from "../../Components";
+import { MaterialIcons } from "@expo/vector-icons";
 
-export default function ProfileScreen() {
+import { Background, Post } from "../../Components";
+
+import AvatarUpload from "../../Components/Auth/RegisterForm/AvatarUpload";
+
+export default function ProfileScreen({ route, navigation }) {
   return (
     <Background>
-      <View style={styles.wrapper}></View>
+      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+        <View style={styles.wrapper}>
+          <AvatarUpload />
+          <TouchableOpacity style={styles.iconContainer} onPress={() => {}}>
+            <MaterialIcons name="logout" size={24} color="#BDBDBD" />
+          </TouchableOpacity>
+          <Post routeParams={route.params} navigateTo={navigation} />
+        </View>
+      </TouchableWithoutFeedback>
     </Background>
   );
 }
@@ -19,5 +37,11 @@ const styles = StyleSheet.create({
 
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
+  },
+
+  iconContainer: {
+    position: "absolute",
+    right: 16,
+    top: 22,
   },
 });

@@ -1,17 +1,24 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import { windowDimensions } from "../../services";
 
 import PropTypes from "prop-types";
 
-export default function Header({ children }) {
-  // Variables
-
+export default function Header({ children, title, flexDirection }) {
   const dimensions = windowDimensions();
-  const { header, headerContent } = styles;
+  const { header, headerContent, text } = styles;
 
   return (
     <View style={header}>
-      <View style={{ ...headerContent, width: dimensions }}>{children}</View>
+      <View
+        style={{
+          ...headerContent,
+          width: dimensions,
+          flexDirection: flexDirection,
+        }}
+      >
+        <Text style={text}>{title}</Text>
+        {children}
+      </View>
     </View>
   );
 }
@@ -30,11 +37,21 @@ const styles = StyleSheet.create({
   },
 
   headerContent: {
-    flexDirection: "row",
     justifyContent: "space-between",
+  },
+
+  text: {
+    fontFamily: "Roboto-Medium",
+    fontStyle: "normal",
+
+    fontSize: 17,
+
+    color: "#212121",
   },
 });
 
 Header.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.element),
+  children: PropTypes.node,
+  title: PropTypes.string.isRequired,
+  flexDirection: PropTypes.string,
 };

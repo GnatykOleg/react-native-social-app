@@ -1,10 +1,9 @@
+import { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
-import { useState } from "react";
+import { PrimaryButton, PrimaryLink, CustomTextInput } from "../../index";
 
-import { PrimaryButton, PrimaryLink, CustomTextInput } from "../..";
-
-import { windowDimensions } from "../../../services";
+import { windowDimensions, keyboardShow } from "../../../services";
 
 import AvatarUpload from "./AvatarUpload";
 
@@ -16,12 +15,13 @@ const initialState = {
   password: "",
 };
 
-export default function RegisterForm({ isShowKeyboard, navigateTo }) {
+export default function RegisterForm({ navigateTo }) {
   const [state, setState] = useState(initialState);
 
   const dimensions = windowDimensions();
+  const isShowKeyboard = keyboardShow();
 
-  const { title, form, showPassword, wrapper, showPasswordText } = styles;
+  const { title, form, showPassword, showPasswordText } = styles;
   const { login, password, email } = state;
 
   const onFormSubmit = () => {
@@ -44,7 +44,9 @@ export default function RegisterForm({ isShowKeyboard, navigateTo }) {
       <View
         style={{
           ...form,
+
           paddingBottom: isShowKeyboard ? 32 : 65,
+
           width: dimensions,
         }}
       >
@@ -127,6 +129,5 @@ const styles = StyleSheet.create({
 });
 
 RegisterForm.propTypes = {
-  isShowKeyboard: PropTypes.bool,
   navigateTo: PropTypes.object,
 };
