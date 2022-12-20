@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
@@ -29,6 +29,7 @@ export default function LoginForm({ navigateTo }) {
     // } else if (password.trim() === "") {
     //   return alert(`Password is required`);
     // } else {
+
     console.log("state", state);
     navigateTo.navigate("Home");
     setState(initialState);

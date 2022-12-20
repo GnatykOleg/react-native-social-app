@@ -1,16 +1,28 @@
-import { View, Image, Text, StyleSheet } from "react-native";
-
+import { useState, useEffect } from "react";
+import {
+  View,
+  Image,
+  Text,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
 import { EvilIcons } from "@expo/vector-icons";
 
 import { windowDimensions } from "../../../services";
+// Проптипы описать
 
-export default function Post() {
+export default function Post({ routeParams, navigateTo }) {
+  const [photos, setPhotos] = useState([]);
   const dimensions = windowDimensions();
+
+  // console.log("Фото приходи в ПОСТ компонент", routeParams);
+  // console.log("Массив фото в компоненте Пост", photos);
 
   const {
     posts,
     post,
-    image,
+    // image,
     imageTitle,
     comments,
     commentsText,
@@ -19,47 +31,71 @@ export default function Post() {
     description,
   } = styles;
 
+  useEffect(() => {
+    if (routeParams) {
+      setPhotos((prevState) => [...prevState, routeParams]);
+    }
+  }, [routeParams]);
+
   return (
     <View style={{ ...posts, width: dimensions }}>
-      <View style={post}>
-        <Image
-          style={image}
-          height={240}
-          width="100%"
-          source={require("../../../../assets/Images/gallery-image.jpg")}
-        />
+      <FlatList
+        data={photos}
+        key={(item, index) => {
+          index.toString();
+        }}
+        renderItem={({ item }) => {
+          return (
+            <View style={post}>
+              <Image
+                style={{ height: 240, borderRadius: 8 }}
+                source={{ uri: item.photo }}
+              />
 
-        <Text style={imageTitle}>The Forest</Text>
+              <Text style={imageTitle}>The Forest</Text>
 
-        <View style={description}>
-          <View style={comments}>
-            <EvilIcons name="comment" size={24} color="#BDBDBD" />
-            <Text style={commentsText}>25</Text>
-          </View>
+              <View style={description}>
+                <TouchableOpacity
+                  style={comments}
+                  onPress={() => navigateTo.navigate("Comments")}
+                >
+                  <EvilIcons name="comment" size={24} color="#BDBDBD" />
+                  <Text style={commentsText}>25</Text>
+                </TouchableOpacity>
 
-          <View style={location}>
-            <EvilIcons name="location" size={24} color="#BDBDBD" />
-            <Text style={locationText}>Ivano-Frankivs'k Region, Ukraine</Text>
-          </View>
-        </View>
-      </View>
+                <TouchableOpacity
+                  style={location}
+                  onPress={() => navigateTo.navigate("Map")}
+                >
+                  <EvilIcons name="location" size={24} color="#BDBDBD" />
+                  <Text style={locationText}>
+                    Ivano-Frankivs'k Region, Ukraine
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          );
+        }}
+      />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  posts: {},
+  posts: {
+    paddingBottom: 82,
+  },
 
   post: {
-    // marginBottom: 32,
+    marginBottom: 32,
 
     backgroundColor: "#E8E8E8",
   },
 
-  image: {
-    resizeMode: "cover",
-    borderRadius: 8,
-  },
+  // image: {
+  //   width: 240,
+  //   borderRadius: 8,
+  // },
 
   description: {
     flexDirection: "row",
@@ -104,3 +140,5 @@ const styles = StyleSheet.create({
     color: "#212121",
   },
 });
+
+// Проптипы описать

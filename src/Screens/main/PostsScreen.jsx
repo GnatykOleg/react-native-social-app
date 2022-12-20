@@ -1,22 +1,13 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 
-import { MaterialIcons } from "@expo/vector-icons";
+import { Post, UserInfo } from "../../Components";
 
-import { Header, Post, UserInfo } from "../../Components";
-
-export default function PostsScreen() {
-  const { container, title } = styles;
-
+export default function PostsScreen({ route, navigation }) {
   return (
     <>
-      <Header>
-        <Text style={title}>Publications</Text>
-        <MaterialIcons name="logout" size={24} color="#BDBDBD" />
-      </Header>
-
-      <View style={container}>
+      <View style={styles.container}>
         <UserInfo />
-        <Post />
+        <Post routeParams={route.params} navigateTo={navigation} />
       </View>
     </>
   );
@@ -27,7 +18,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     paddingTop: 32,
-
     alignItems: "center",
   },
 });

@@ -2,7 +2,12 @@ import { TouchableOpacity, StyleSheet, Text } from "react-native";
 
 import PropTypes from "prop-types";
 
-export default function PrimaryButton({ onPress, text }) {
+export default function PrimaryButton({
+  onPress,
+  text,
+  bgColor = "#FF6C00",
+  textColor,
+}) {
   const { button, buttonText } = styles;
 
   return (
@@ -36,4 +41,6 @@ const styles = StyleSheet.create({
 PrimaryButton.propTypes = {
   onPress: PropTypes.func.isRequired,
   text: PropTypes.string.isRequired,
+  bgColor: PropTypes.string,
+  textColor: PropTypes.string,
 };

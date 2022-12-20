@@ -7,4 +7,5 @@ export { default as RegisterForm } from "./Auth/RegisterForm/RegisterForm";
 export { default as LoginForm } from "./Auth/LoginForm/LoginForm";
 export { default as Post } from "./Posts/Post/Post";
 export { default as UserInfo } from "./Posts/Post/UserInfo";
-export { default as Photo } from "./Posts/CreatePost/Photo";
+export { default as AddPhoto } from "./Posts/CreatePost/AddPhoto";
+export { default as CreatePostForm } from "./Posts/CreatePost/CreatePostForm";

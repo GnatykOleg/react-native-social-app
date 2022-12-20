@@ -1,6 +1,12 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import { LoginScreen, RegistrationScreen, Home } from "./src/Screens";
+import {
+  LoginScreen,
+  RegistrationScreen,
+  Home,
+  MapScreen,
+  CommentsScreen,
+} from "./src/Screens";
 
 export const useRoute = (isAuth) => {
   const Stack = createNativeStackNavigator();
@@ -12,11 +18,24 @@ export const useRoute = (isAuth) => {
   return (
     <Stack.Navigator
       initialRouteName="Registration"
-      screenOptions={{ headerShown: false }}
+      screenOptions={{
+        headerShown: false,
+        headerTitleAlign: "center",
+      }}
     >
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Registration" component={RegistrationScreen} />
       <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen
+        name="Map"
+        component={MapScreen}
+        options={{ headerShown: true }}
+      />
+      <Stack.Screen
+        name="Comments"
+        component={CommentsScreen}
+        options={{ headerShown: true }}
+      />
     </Stack.Navigator>
   );
 };
