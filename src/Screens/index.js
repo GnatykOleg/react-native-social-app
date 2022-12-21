@@ -12,5 +12,6 @@ export { default as Home } from "./main/Home";
 
 // Nested screens
 
+export { default as DefaultScreenPosts } from "./nestedScreens/DefaultScreenPosts";
 export { default as MapScreen } from "./nestedScreens/MapScreen";
 export { default as CommentsScreen } from "./nestedScreens/CommentsScreen";

@@ -2,12 +2,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import { TouchableOpacity } from "react-native";
 
-import {
-  MaterialCommunityIcons,
-  AntDesign,
-  Feather,
-  MaterialIcons,
-} from "@expo/vector-icons";
+import { MaterialCommunityIcons, AntDesign, Feather } from "@expo/vector-icons";
 
 import { ProfileScreen, PostsScreen, CreatePostsScreen } from "../index";
 
@@ -16,7 +11,6 @@ export default function Home({ navigation }) {
 
   return (
     <Tab.Navigator
-      initialRouteName="Posts"
       screenOptions={{
         tabBarShowLabel: false,
         tabBarActiveTintColor: "#fff",
@@ -27,12 +21,8 @@ export default function Home({ navigation }) {
     >
       <Tab.Screen
         options={{
-          title: "Publications",
-          headerRight: () => (
-            <TouchableOpacity style={{ paddingRight: 10 }} onPress={() => {}}>
-              <MaterialIcons name="logout" size={24} color="#BDBDBD" />
-            </TouchableOpacity>
-          ),
+          headerShown: false,
+
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons
               name="view-gallery"
