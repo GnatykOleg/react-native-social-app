@@ -61,7 +61,7 @@ export default function CreatePostForm({ navigateTo, photo }) {
     // return alert(`Location is required`)
     //   }
     takeLocation();
-    navigateTo.navigate("Posts", { photo });
+    navigateTo.navigate("DefaultScreenPosts", { photo });
   };
 
   // if (hasPermission === false) {
