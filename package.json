@@ -1,5 +1,5 @@
 {
-  "name": "reactnativeexpoapp",
+  "name": "react-native-social-app",
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
@@ -22,6 +22,7 @@
     "expo-media-library": "~14.2.0",
     "expo-splash-screen": "~0.16.2",
     "expo-status-bar": "~1.4.0",
+    "firebase": "^9.15.0",
     "prop-types": "^15.8.1",
     "react": "18.0.0",
     "react-native": "0.69.6",
