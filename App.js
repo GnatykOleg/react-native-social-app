@@ -10,6 +10,10 @@ import { NavigationContainer } from "@react-navigation/native";
 
 import { useRoute } from "./router";
 
+import { Provider } from "react-redux";
+
+import { store } from "./src/redux/store";
+
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
@@ -25,8 +29,8 @@ export default function App() {
           "Roboto-Medium": require("./assets/fonts/Roboto-Medium.ttf"),
           "Roboto-Bold": require("./assets/fonts/Roboto-Bold.ttf"),
         });
-      } catch (e) {
-        console.warn(e);
+      } catch (error) {
+        console.warn(error);
       } finally {
         setAppIsReady(true);
       }
@@ -46,9 +50,11 @@ export default function App() {
   }
 
   return (
-    <View onLayout={onLayoutRootView} style={styles.container}>
-      <NavigationContainer>{routing}</NavigationContainer>
-    </View>
+    <Provider store={store}>
+      <View onLayout={onLayoutRootView} style={styles.container}>
+        <NavigationContainer>{routing}</NavigationContainer>
+      </View>
+    </Provider>
   );
 }
 
