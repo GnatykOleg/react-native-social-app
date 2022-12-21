@@ -1,1 +1,1 @@
-# reactNativeExpoApp
+# React Native Social App
