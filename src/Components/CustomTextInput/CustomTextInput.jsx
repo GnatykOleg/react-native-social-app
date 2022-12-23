@@ -10,6 +10,7 @@ export default function CustomTextInput({
   marginBottom = 16,
   isPrimaryInput = true,
   paddingLeft = 16,
+  secureTextEntry = false,
 }) {
   const [onInput, setOnInput] = useState(false);
 
@@ -48,6 +49,7 @@ export default function CustomTextInput({
       onFocus={() => setOnInput(true)}
       onBlur={() => setOnInput(false)}
       selectionColor="#FF6C00"
+      secureTextEntry={secureTextEntry}
     />
   );
 }
@@ -103,4 +105,5 @@ CustomTextInput.propTypes = {
   placeholder: PropTypes.string.isRequired,
   marginBottom: PropTypes.number,
   isPrimaryInput: PropTypes.bool,
+  secureTextEntry: PropTypes.bool,
 };

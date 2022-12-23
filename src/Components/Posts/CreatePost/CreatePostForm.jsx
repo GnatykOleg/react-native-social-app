@@ -2,12 +2,12 @@ import { useState, useEffect } from "react";
 import { View, StyleSheet, Text } from "react-native";
 import { EvilIcons } from "@expo/vector-icons";
 
-import { PrimaryButton, CustomTextInput } from "../../index";
+import PrimaryButton from "../../PrimaryButton/PrimaryButton";
+import CustomTextInput from "../../CustomTextInput/CustomTextInput";
 
 import { windowDimensions } from "../../../services";
 
 import PropTypes from "prop-types";
-import { Camera } from "expo-camera";
 
 import * as Location from "expo-location";
 
@@ -38,7 +38,7 @@ export default function CreatePostForm({ navigateTo, photo }) {
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
-      console.log("status", status);
+      // console.log("status", status);
       if (status !== "granted") {
         return console.log("Permission to access location was denied");
       }
@@ -48,6 +48,7 @@ export default function CreatePostForm({ navigateTo, photo }) {
   const takeLocation = async () => {
     try {
       const getPhotoLocation = await Location.getCurrentPositionAsync();
+
       console.log("Location ----->", getPhotoLocation);
     } catch (error) {
       console.log("error", error);

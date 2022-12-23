@@ -1,10 +1,17 @@
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
 import { windowDimensions, keyboardShow } from "../../../services";
 
-import { PrimaryButton, PrimaryLink, CustomTextInput } from "../../index";
+import PrimaryButton from "../../PrimaryButton/PrimaryButton";
+import PrimaryLink from "../../PrimaryLink/PrimaryLink";
+import CustomTextInput from "../../CustomTextInput/CustomTextInput";
+
+import { handleSignIn, handleSignUp } from "../../../redux/auth/authOperations";
+
+import { isEmail, isEmpty } from "validator";
 
 import PropTypes from "prop-types";
 
@@ -16,24 +23,29 @@ const initialState = {
 export default function LoginForm({ navigateTo }) {
   const [state, setState] = useState(initialState);
 
+  const [secureTextEntry, setSecureTextEntry] = useState(true);
+
   const { password, email } = state;
 
   const dimensions = windowDimensions();
   const isShowKeyboard = keyboardShow();
 
+  const dispatch = useDispatch();
+
   const { title, form, showPassword, showPasswordText } = styles;
+  const passwordText = secureTextEntry ? "Show" : "Hide";
 
   const onFormSubmit = () => {
-    // if (email.trim() === "") {
-    //   return alert(`Email is required`);
-    // } else if (password.trim() === "") {
-    //   return alert(`Password is required`);
-    // } else {
+    if (!isEmail(email)) {
+      return alert("Please type a valid email, example : nickname@mail.com");
+    } else if (isEmpty(password)) {
+      return alert("Please type a password");
+    } else {
+      dispatch(handleSignIn({ email, password }));
 
-    console.log("state", state);
-    navigateTo.navigate("Home");
-    setState(initialState);
-    // }
+      // navigateTo.navigate("Home");
+      setState(initialState);
+    }
   };
 
   return (
@@ -63,10 +75,16 @@ export default function LoginForm({ navigateTo }) {
           value={password}
           placeholder="Password"
           marginBottom={0}
+          secureTextEntry={secureTextEntry}
         />
 
-        <TouchableOpacity style={showPassword}>
-          <Text style={showPasswordText}>Show</Text>
+        <TouchableOpacity
+          onPress={() => {
+            setSecureTextEntry((state) => !state);
+          }}
+          style={showPassword}
+        >
+          <Text style={showPasswordText}>{passwordText}</Text>
         </TouchableOpacity>
       </View>
       {!isShowKeyboard && (

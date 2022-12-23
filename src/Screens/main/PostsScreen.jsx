@@ -1,18 +1,21 @@
 import { StyleSheet, TouchableOpacity } from "react-native";
-
-import { MapScreen, CommentsScreen, DefaultScreenPosts } from "../../Screens";
+import { useDispatch } from "react-redux";
+import { handleSignOut } from "../../redux/auth/authOperations";
 
 import {
-  MaterialCommunityIcons,
-  AntDesign,
-  Feather,
-  MaterialIcons,
-} from "@expo/vector-icons";
+  MapScreen,
+  CommentsScreen,
+  DefaultScreenPosts,
+} from "../nestedScreens";
+
+import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 export default function PostsScreen() {
   const NestedStack = createNativeStackNavigator();
+  const dispatch = useDispatch();
+
   return (
     <NestedStack.Navigator screenOptions={{ headerTitleAlign: "center" }}>
       <NestedStack.Screen
@@ -21,7 +24,10 @@ export default function PostsScreen() {
         options={{
           title: "Publications",
           headerRight: () => (
-            <TouchableOpacity style={{ paddingRight: 10 }} onPress={() => {}}>
+            <TouchableOpacity
+              style={{ paddingRight: 10 }}
+              onPress={() => dispatch(handleSignOut())}
+            >
               <MaterialIcons name="logout" size={24} color="#BDBDBD" />
             </TouchableOpacity>
           ),

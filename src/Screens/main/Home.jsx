@@ -4,7 +4,9 @@ import { TouchableOpacity } from "react-native";
 
 import { MaterialCommunityIcons, AntDesign, Feather } from "@expo/vector-icons";
 
-import { ProfileScreen, PostsScreen, CreatePostsScreen } from "../index";
+import ProfileScreen from "./ProfileScreen";
+import PostsScreen from "./PostsScreen";
+import CreatePostsScreen from "./CreatePostsScreen";
 
 export default function Home({ navigation }) {
   const Tab = createBottomTabNavigator();

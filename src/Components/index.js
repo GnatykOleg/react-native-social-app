@@ -1,5 +1,4 @@
 export { default as Background } from "./Background/Background";
-export { default as Header } from "./Header/Header";
 export { default as PrimaryButton } from "./PrimaryButton/PrimaryButton";
 export { default as PrimaryLink } from "./PrimaryLink/PrimaryLink";
 export { default as CustomTextInput } from "./CustomTextInput/CustomTextInput";

@@ -5,13 +5,13 @@ import { LoginScreen, RegistrationScreen, Home } from "./src/Screens";
 export const useRoute = (isAuth) => {
   const Stack = createNativeStackNavigator();
 
-  // if (!isAuth) {
-  //   return <Home />;
-  // }
+  if (isAuth) {
+    return <Home />;
+  }
 
   return (
     <Stack.Navigator
-      initialRouteName="Registration"
+      initialRouteName="Login"
       screenOptions={{
         headerShown: false,
         headerTitleAlign: "center",
