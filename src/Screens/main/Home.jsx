@@ -1,12 +1,18 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
+import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
+
 import { TouchableOpacity } from "react-native";
 
 import { MaterialCommunityIcons, AntDesign, Feather } from "@expo/vector-icons";
 
-import { ProfileScreen, PostsScreen, CreatePostsScreen } from "../index";
+import ProfileScreen from "./ProfileScreen";
+import PostsScreen from "./PostsScreen";
+import CreatePostsScreen from "./CreatePostsScreen";
 
-export default function Home({ navigation }) {
+import { logOut } from "./PostsScreen";
+
+export default function Home() {
   const Tab = createBottomTabNavigator();
 
   return (
@@ -16,11 +22,10 @@ export default function Home({ navigation }) {
         tabBarActiveTintColor: "#fff",
         tabBarActiveBackgroundColor: "#FF6C00",
         headerTitleAlign: "center",
-        tabBarStyle: { height: 50 },
       }}
     >
       <Tab.Screen
-        options={{
+        options={({ route }) => ({
           headerShown: false,
 
           tabBarIcon: ({ color, size }) => (
@@ -30,18 +35,26 @@ export default function Home({ navigation }) {
               color={color}
             />
           ),
-        }}
+          tabBarStyle: ((route) => {
+            const routeName = getFocusedRouteNameFromRoute(route) ?? "";
+            if (routeName === "Comments" || routeName === "Map") {
+              return { display: "none" };
+            }
+            return { height: 50 };
+          })(route),
+        })}
         name="Posts"
         component={PostsScreen}
       />
 
       <Tab.Screen
         options={{
+          tabBarStyle: { display: "none" },
           title: "Create Post",
           headerLeft: () => (
             <TouchableOpacity
               style={{ paddingLeft: 10 }}
-              onPress={() => navigation.goBack()}
+              // onPress={() => navigation.goBack()}
             >
               <AntDesign
                 name="arrowleft"

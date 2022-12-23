@@ -1,10 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
-import { AntDesign, Entypo } from "@expo/vector-icons";
+import { Entypo } from "@expo/vector-icons";
 
-import { Header, AddPhoto, CreatePostForm } from "../../Components";
-
-import * as Location from "expo-location";
+import { CreatePostForm } from "../../Components";
 
 import { Camera } from "expo-camera";
 
@@ -19,27 +17,14 @@ export default function PostsScreen({ navigation }) {
   const { camera, iconContainer, cameraTitle, cameraWrapper, photoContainer } =
     stylesCamera;
 
-  // useEffect(() => {
-  //   (async () => {
-  //     let { status } = await Location.requestForegroundPermissionsAsync();
-  //     console.log("status", status);
-  //     if (status !== "granted") {
-  //       return console.log("Permission to access location was denied");
-  //     }
-  //   })();
-  // }, []);
-
   const takePhoto = async () => {
     try {
       const { uri } = await snap.takePictureAsync();
 
-      // const location = await Location.getCurrentPositionAsync();
-      // console.log("Location", location);
-      // console.log(uri);
       setShowCamera(false);
       setPhoto(uri);
     } catch (error) {
-      console.log("error", error);
+      console.log("error --->", error.message);
     }
   };
 
@@ -76,8 +61,7 @@ export default function PostsScreen({ navigation }) {
             </Text>
           </TouchableOpacity>
         </View>
-        {/* <AddPhoto /> */}
-        {/* Это временно без редакса прокидываю фото так как AddPhoto вообще это отдельный компонент */}
+
         <CreatePostForm navigateTo={navigation} photo={photo} />
       </View>
     </>

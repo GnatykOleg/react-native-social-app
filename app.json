@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "reactNativeExpoApp",
-    "slug": "reactNativeExpoApp",
+    "name": "react-native-social-app",
+    "slug": "react-native-social-app",
     "version": "1.0.0",
     "orientation": "default",
     "icon": "./assets/icon.png",

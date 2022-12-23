@@ -5,12 +5,18 @@
 
 // import { Camera } from "expo-camera";
 
+// import { firestore, storage } from "../../../firebase/config";
+
+// import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+
 // import { windowDimensions } from "../../../services";
 
 // export default function AddPhoto() {
 //   const [photo, setPhoto] = useState(false);
 //   const [snap, setSnap] = useState(null);
 //   const [showCamera, setShowCamera] = useState(true);
+
+//   console.log("snap", snap);
 
 //   const dimensions = windowDimensions();
 
@@ -20,7 +26,9 @@
 //   const takePhoto = async () => {
 //     try {
 //       const { uri } = await snap.takePictureAsync();
-//       console.log(uri);
+
+//       console.log("uri", uri);
+
 //       setShowCamera(false);
 //       setPhoto(uri);
 //     } catch (error) {
@@ -66,39 +74,28 @@
 //   cameraWrapper: {
 //     // alignItems: "center",
 //   },
-
 //   camera: {
 //     justifyContent: "center",
 //     alignItems: "center",
-
 //     height: 240,
-
 //     borderRadius: 8,
-
 //     backgroundColor: "#E8E8E8",
 //   },
-
 //   cameraTitle: {
 //     marginTop: 8,
 //     marginBottom: 32,
-
 //     fontFamily: "Roboto-Regular",
 //     fontStyle: "normal",
-
 //     fontSize: 16,
-
 //     color: "#BDBDBD",
 //   },
-
 //   iconContainer: {
 //     zIndex: 999,
 //     justifyContent: "center",
 //     alignItems: "center",
-
 //     width: 60,
 //     height: 60,
 //     borderRadius: 50,
 //   },
-
 //   photoContainer: {},
 // });
