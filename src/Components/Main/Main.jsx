@@ -21,15 +21,15 @@ export default function Main() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        const { uid, displayName } = user;
-        dispatch(authStateChangeUser({ uid, displayName, stateChange: true }));
+        const { uid, displayName, email } = user;
+        dispatch(
+          authStateChangeUser({ uid, displayName, email, stateChange: true })
+        );
       } else {
       }
     });
     return unsubscribe;
-  }, [dispatch]);
-
-  // поставить селектор
+  }, []);
 
   const routing = useRoute(stateChange);
 

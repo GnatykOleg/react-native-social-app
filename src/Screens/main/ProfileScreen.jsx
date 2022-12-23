@@ -4,7 +4,11 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
   TouchableOpacity,
+  Text,
 } from "react-native";
+
+import { useSelector } from "react-redux";
+import { getAuthSelector } from "../../redux/auth/authSelectors";
 
 import { useDispatch } from "react-redux";
 
@@ -18,6 +22,9 @@ import AvatarUpload from "../../Components/Auth/RegisterForm/AvatarUpload";
 
 export default function ProfileScreen({ route, navigation }) {
   const dispatch = useDispatch();
+
+  const { nickname } = useSelector(getAuthSelector);
+
   return (
     <Background>
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -29,6 +36,7 @@ export default function ProfileScreen({ route, navigation }) {
           >
             <MaterialIcons name="logout" size={24} color="#BDBDBD" />
           </TouchableOpacity>
+          <Text style={styles.login}>{nickname}</Text>
           <Post routeParams={route.params} navigateTo={navigation} />
         </View>
       </TouchableWithoutFeedback>
@@ -51,5 +59,14 @@ const styles = StyleSheet.create({
     position: "absolute",
     right: 16,
     top: 22,
+  },
+
+  login: {
+    fontFamily: "Roboto-Medium",
+    fontStyle: "normal",
+
+    fontSize: 30,
+
+    color: "#212121",
   },
 });

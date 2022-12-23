@@ -9,10 +9,13 @@ import {
 } from "react-native";
 import { EvilIcons } from "@expo/vector-icons";
 
+import { firestore } from "../../../firebase/config";
+import { collection, getDocs } from "firebase/firestore";
+
 import { windowDimensions } from "../../../services";
 // Проптипы описать
 
-export default function Post({ routeParams, navigateTo }) {
+export default function Post({ navigateTo }) {
   const [photos, setPhotos] = useState([]);
   const dimensions = windowDimensions();
 
@@ -22,7 +25,7 @@ export default function Post({ routeParams, navigateTo }) {
   const {
     posts,
     post,
-    // image,
+
     imageTitle,
     comments,
     commentsText,
@@ -31,11 +34,42 @@ export default function Post({ routeParams, navigateTo }) {
     description,
   } = styles;
 
-  useEffect(() => {
-    if (routeParams) {
-      setPhotos((prevState) => [...prevState, routeParams]);
+  // const getAllPosts = async () => {
+  //   try {
+  //     const docRef = collection(firestore, "posts");
+
+  //     const docSnap = await getDocs(docRef);
+
+  //     const postsFromServer = docSnap.docs.map((doc) => ({
+  //       ...doc.data(),
+  //       docID: doc.id,
+  //     }));
+  //     setPhotos(postsFromServer);
+  //   } catch (error) {
+  //     console.log("error", error);
+  //   }
+  // };
+
+  const getAllPosts = async () => {
+    try {
+      const docRef = collection(firestore, "posts");
+
+      const querySnapshot = await getDocs(docRef);
+
+      const postsFromServer = querySnapshot.docs.map((doc) => ({
+        ...doc.data(),
+        docID: doc.id,
+      }));
+
+      setPhotos(postsFromServer);
+    } catch (error) {
+      console.log("error", error);
     }
-  }, [routeParams]);
+  };
+
+  useEffect(() => {
+    getAllPosts();
+  }, []);
 
   return (
     <View style={{ ...posts, width: dimensions }}>
@@ -49,28 +83,33 @@ export default function Post({ routeParams, navigateTo }) {
             <View style={post}>
               <Image
                 style={{ height: 240, borderRadius: 8 }}
-                source={{ uri: item.photo }}
+                source={{ uri: item.photoLink }}
               />
 
-              <Text style={imageTitle}>The Forest</Text>
+              <Text style={imageTitle}>{item.name}</Text>
 
               <View style={description}>
                 <TouchableOpacity
                   style={comments}
-                  onPress={() => navigateTo.navigate("Comments")}
+                  onPress={() =>
+                    navigateTo.navigate("Comments", {
+                      image: item.photoLink,
+                      postId: item.docID,
+                    })
+                  }
                 >
                   <EvilIcons name="comment" size={24} color="#BDBDBD" />
-                  <Text style={commentsText}>25</Text>
+                  <Text style={commentsText}>Comments</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
                   style={location}
-                  onPress={() => navigateTo.navigate("Map")}
+                  onPress={() =>
+                    navigateTo.navigate("Map", { coords: item.coordinations })
+                  }
                 >
                   <EvilIcons name="location" size={24} color="#BDBDBD" />
-                  <Text style={locationText}>
-                    Ivano-Frankivs'k Region, Ukraine
-                  </Text>
+                  <Text style={locationText}>Location</Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -89,7 +128,7 @@ const styles = StyleSheet.create({
   post: {
     marginBottom: 32,
 
-    backgroundColor: "#E8E8E8",
+    // backgroundColor: "#E8E8E8",
   },
 
   // image: {

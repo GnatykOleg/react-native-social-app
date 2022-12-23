@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
 
 CustomTextInput.propTypes = {
   onChangeText: PropTypes.func.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.string,
   placeholder: PropTypes.string.isRequired,
   marginBottom: PropTypes.number,
   isPrimaryInput: PropTypes.bool,

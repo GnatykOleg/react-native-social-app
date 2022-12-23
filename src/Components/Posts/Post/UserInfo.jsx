@@ -1,10 +1,17 @@
 import { View, Text, StyleSheet, Image } from "react-native";
 
+import { useSelector } from "react-redux";
+
+import { getAuthSelector } from "../../../redux/auth/authSelectors";
+
 import { windowDimensions } from "../../../services";
 
 export default function UserInfo() {
   const dimensions = windowDimensions();
   const { user, avatar, name, email } = styles;
+
+  const userInfo = useSelector(getAuthSelector);
+
   return (
     <View style={{ ...user, width: dimensions }}>
       <Image
@@ -13,8 +20,8 @@ export default function UserInfo() {
       />
 
       <View>
-        <Text style={name}>Natali Romanova</Text>
-        <Text style={email}>email@example.com</Text>
+        <Text style={name}>{userInfo.nickname}</Text>
+        <Text style={email}>{userInfo.email}</Text>
       </View>
     </View>
   );

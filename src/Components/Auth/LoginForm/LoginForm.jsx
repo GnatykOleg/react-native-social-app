@@ -36,16 +36,16 @@ export default function LoginForm({ navigateTo }) {
   const passwordText = secureTextEntry ? "Show" : "Hide";
 
   const onFormSubmit = () => {
-    if (!isEmail(email)) {
-      return alert("Please type a valid email, example : nickname@mail.com");
-    } else if (isEmpty(password)) {
-      return alert("Please type a password");
-    } else {
-      dispatch(handleSignIn({ email, password }));
+    // if (!isEmail(email)) {
+    //   return alert("Please type a valid email, example : nickname@mail.com");
+    // } else if (isEmpty(password)) {
+    //   return alert("Please type a password");
+    // } else {
+    dispatch(handleSignIn({ email, password }));
 
-      // navigateTo.navigate("Home");
-      setState(initialState);
-    }
+    navigateTo.navigate("Home");
+    setState(initialState);
+    // }
   };
 
   return (

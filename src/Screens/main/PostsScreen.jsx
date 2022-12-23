@@ -13,8 +13,8 @@ import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 export default function PostsScreen() {
-  const NestedStack = createNativeStackNavigator();
   const dispatch = useDispatch();
+  const NestedStack = createNativeStackNavigator();
 
   return (
     <NestedStack.Navigator screenOptions={{ headerTitleAlign: "center" }}>
@@ -23,6 +23,7 @@ export default function PostsScreen() {
         component={DefaultScreenPosts}
         options={{
           title: "Publications",
+
           headerRight: () => (
             <TouchableOpacity
               style={{ paddingRight: 10 }}

@@ -1,104 +1,101 @@
-import { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+// import { useState } from "react";
+// import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 
-import { Entypo } from "@expo/vector-icons";
+// import { Entypo } from "@expo/vector-icons";
 
-import { Camera } from "expo-camera";
+// import { Camera } from "expo-camera";
 
-import { windowDimensions } from "../../../services";
+// import { firestore, storage } from "../../../firebase/config";
 
-export default function AddPhoto() {
-  const [photo, setPhoto] = useState(false);
-  const [snap, setSnap] = useState(null);
-  const [showCamera, setShowCamera] = useState(true);
+// import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
-  const dimensions = windowDimensions();
+// import { windowDimensions } from "../../../services";
 
-  const { camera, iconContainer, cameraTitle, cameraWrapper, photoContainer } =
-    styles;
+// export default function AddPhoto() {
+//   const [photo, setPhoto] = useState(false);
+//   const [snap, setSnap] = useState(null);
+//   const [showCamera, setShowCamera] = useState(true);
 
-  const takePhoto = async () => {
-    try {
-      const { uri } = await snap.takePictureAsync();
-      console.log(uri);
-      setShowCamera(false);
-      setPhoto(uri);
-    } catch (error) {
-      console.log("error", error);
-    }
-  };
+//   console.log("snap", snap);
 
-  return (
-    <View style={cameraWrapper}>
-      {photo && (
-        <View style={{ ...photoContainer, width: dimensions }}>
-          <Image source={{ uri: photo }} style={{ height: 240 }} />
-        </View>
-      )}
+//   const dimensions = windowDimensions();
 
-      {showCamera && (
-        <Camera ref={setSnap} style={{ ...camera, width: dimensions }}>
-          <TouchableOpacity
-            onPress={takePhoto}
-            activeOpacity={0.8}
-            style={iconContainer}
-          >
-            <Entypo name="camera" size={24} color="#BDBDBD" />
-          </TouchableOpacity>
-        </Camera>
-      )}
+//   const { camera, iconContainer, cameraTitle, cameraWrapper, photoContainer } =
+//     styles;
 
-      <TouchableOpacity
-        onPress={() => {
-          setShowCamera(true);
-          setPhoto(false);
-        }}
-      >
-        <Text style={cameraTitle}>
-          {photo ? "Change photo" : "Upload photo"}
-        </Text>
-      </TouchableOpacity>
-    </View>
-  );
-}
+//   const takePhoto = async () => {
+//     try {
+//       const { uri } = await snap.takePictureAsync();
 
-const styles = StyleSheet.create({
-  cameraWrapper: {
-    // alignItems: "center",
-  },
+//       console.log("uri", uri);
 
-  camera: {
-    justifyContent: "center",
-    alignItems: "center",
+//       setShowCamera(false);
+//       setPhoto(uri);
+//     } catch (error) {
+//       console.log("error", error);
+//     }
+//   };
 
-    height: 240,
+//   return (
+//     <View style={cameraWrapper}>
+//       {photo && (
+//         <View style={{ ...photoContainer, width: dimensions }}>
+//           <Image source={{ uri: photo }} style={{ height: 240 }} />
+//         </View>
+//       )}
 
-    borderRadius: 8,
+//       {showCamera && (
+//         <Camera ref={setSnap} style={{ ...camera, width: dimensions }}>
+//           <TouchableOpacity
+//             onPress={takePhoto}
+//             activeOpacity={0.8}
+//             style={iconContainer}
+//           >
+//             <Entypo name="camera" size={24} color="#BDBDBD" />
+//           </TouchableOpacity>
+//         </Camera>
+//       )}
 
-    backgroundColor: "#E8E8E8",
-  },
+//       <TouchableOpacity
+//         onPress={() => {
+//           setShowCamera(true);
+//           setPhoto(false);
+//         }}
+//       >
+//         <Text style={cameraTitle}>
+//           {photo ? "Change photo" : "Upload photo"}
+//         </Text>
+//       </TouchableOpacity>
+//     </View>
+//   );
+// }
 
-  cameraTitle: {
-    marginTop: 8,
-    marginBottom: 32,
-
-    fontFamily: "Roboto-Regular",
-    fontStyle: "normal",
-
-    fontSize: 16,
-
-    color: "#BDBDBD",
-  },
-
-  iconContainer: {
-    zIndex: 999,
-    justifyContent: "center",
-    alignItems: "center",
-
-    width: 60,
-    height: 60,
-    borderRadius: 50,
-  },
-
-  photoContainer: {},
-});
+// const styles = StyleSheet.create({
+//   cameraWrapper: {
+//     // alignItems: "center",
+//   },
+//   camera: {
+//     justifyContent: "center",
+//     alignItems: "center",
+//     height: 240,
+//     borderRadius: 8,
+//     backgroundColor: "#E8E8E8",
+//   },
+//   cameraTitle: {
+//     marginTop: 8,
+//     marginBottom: 32,
+//     fontFamily: "Roboto-Regular",
+//     fontStyle: "normal",
+//     fontSize: 16,
+//     color: "#BDBDBD",
+//   },
+//   iconContainer: {
+//     zIndex: 999,
+//     justifyContent: "center",
+//     alignItems: "center",
+//     width: 60,
+//     height: 60,
+//     borderRadius: 50,
+//   },
+//   photoContainer: {},
+// });

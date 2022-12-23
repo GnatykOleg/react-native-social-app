@@ -2,12 +2,12 @@ import { View, StyleSheet } from "react-native";
 
 import { Post, UserInfo } from "../../Components";
 
-export default function DefaultScreenPosts({ route, navigation }) {
+export default function DefaultScreenPosts({ navigation }) {
   return (
     <>
       <View style={styles.container}>
         <UserInfo />
-        <Post routeParams={route.params} navigateTo={navigation} />
+        <Post navigateTo={navigation} />
       </View>
     </>
   );

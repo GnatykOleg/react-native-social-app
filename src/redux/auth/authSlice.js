@@ -10,6 +10,7 @@ import {
 const initialState = {
   userId: null,
   nickname: null,
+  email: null,
   loading: false,
   error: null,
   stateChange: null,
@@ -68,6 +69,7 @@ export const authSlice = createSlice({
       store.userId = null;
       store.nickname = null;
       store.stateChange = null;
+      store.email = null;
     });
     builder.addCase(handleSignOut.rejected, (store, { payload }) => {
       store.error = payload;
@@ -83,15 +85,15 @@ export const authSlice = createSlice({
       authStateChangeUser.fulfilled,
       (
         store,
-        action
-        // { payload: { displayName, uid, stateChange } }
+
+        { payload: { displayName, uid, stateChange, email } }
       ) => {
-        console.log("action", action);
         store.loading = false;
         store.error = null;
-        store.nickname = action.payload.displayName;
-        store.userId = action.payload.uid;
-        store.stateChange = action.payload.stateChange;
+        store.nickname = displayName;
+        store.userId = uid;
+        store.stateChange = stateChange;
+        store.email = email;
       }
     );
     builder.addCase(authStateChangeUser.rejected, (store, { payload }) => {

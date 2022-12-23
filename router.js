@@ -17,7 +17,6 @@ export const useRoute = (isAuth) => {
         headerTitleAlign: "center",
       }}
     >
-      <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Registration" component={RegistrationScreen} />
       <Stack.Screen name="Login" component={LoginScreen} />
     </Stack.Navigator>
