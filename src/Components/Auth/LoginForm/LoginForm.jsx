@@ -1,15 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
-
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 
 import { windowDimensions, keyboardShow } from "../../../services";
 
-import PrimaryButton from "../../PrimaryButton/PrimaryButton";
-import PrimaryLink from "../../PrimaryLink/PrimaryLink";
-import CustomTextInput from "../../CustomTextInput/CustomTextInput";
+import PrimaryButton from "../../NativeComponents/PrimaryButton/PrimaryButton";
+import PrimaryLink from "../../NativeComponents/PrimaryLink/PrimaryLink";
+import CustomTextInput from "../../NativeComponents/CustomTextInput/CustomTextInput";
+import ShowHidePassord from "../../NativeComponents/ShowHidePassord/ShowHidePassord";
 
-import { handleSignIn, handleSignUp } from "../../../redux/auth/authOperations";
+import { handleSignIn } from "../../../redux/auth/authOperations";
 
 import { isEmail, isEmpty } from "validator";
 
@@ -20,39 +20,37 @@ const initialState = {
   password: "",
 };
 
-export default function LoginForm({ navigateTo }) {
+export default function LoginForm({ navigation }) {
   const [state, setState] = useState(initialState);
-
   const [secureTextEntry, setSecureTextEntry] = useState(true);
 
-  const { password, email } = state;
-
+  const dispatch = useDispatch();
   const dimensions = windowDimensions();
   const isShowKeyboard = keyboardShow();
 
-  const dispatch = useDispatch();
+  const { password, email } = state;
 
-  const { title, form, showPassword, showPasswordText } = styles;
-  const passwordText = secureTextEntry ? "Show" : "Hide";
+  const { title, form } = styles;
+
+  const isNotEmptyFiled = password && email;
+  const isDataBgColor = isNotEmptyFiled ? "#FF6C00" : "#F6F6F6";
+  const isDataTextColor = isNotEmptyFiled ? "#FFF" : "#BDBDBD";
 
   const onFormSubmit = () => {
-    // if (!isEmail(email)) {
-    //   return alert("Please type a valid email, example : nickname@mail.com");
-    // } else if (isEmpty(password)) {
-    //   return alert("Please type a password");
-    // } else {
-    dispatch(handleSignIn({ email, password }));
-
-    navigateTo.navigate("Home");
-    setState(initialState);
-    // }
+    if (!isEmail(email)) {
+      return alert("Please type a valid email. Example : nickname@mail.com");
+    } else if (isEmpty(password)) {
+      return alert("Please type a password");
+    } else {
+      dispatch(handleSignIn({ email, password }));
+      setState(initialState);
+    }
   };
 
   return (
     <View
       style={{
         ...form,
-
         paddingBottom: isShowKeyboard ? 32 : 65,
         width: dimensions,
       }}
@@ -78,20 +76,23 @@ export default function LoginForm({ navigateTo }) {
           secureTextEntry={secureTextEntry}
         />
 
-        <TouchableOpacity
+        <ShowHidePassord
+          secureTextEntry={secureTextEntry}
           onPress={() => {
             setSecureTextEntry((state) => !state);
           }}
-          style={showPassword}
-        >
-          <Text style={showPasswordText}>{passwordText}</Text>
-        </TouchableOpacity>
+        />
       </View>
       {!isShowKeyboard && (
         <>
-          <PrimaryButton onPress={onFormSubmit} text="Sign In" />
+          <PrimaryButton
+            bgColor={isDataBgColor}
+            textColor={isDataTextColor}
+            onPress={onFormSubmit}
+            text="Sign In"
+          />
           <PrimaryLink
-            onPress={() => navigateTo.navigate("Registration")}
+            onPress={() => navigation.navigate("Registration")}
             text="Don't have an account? Registration"
           />
         </>
@@ -114,23 +115,8 @@ const styles = StyleSheet.create({
   },
 
   form: {},
-
-  showPassword: {
-    position: "absolute",
-
-    right: 16,
-    top: 16,
-  },
-  showPasswordText: {
-    fontFamily: "Roboto-Regular",
-    fontStyle: "normal",
-
-    fontsSize: 16,
-
-    color: "#1B4371",
-  },
 });
 
 LoginForm.propTypes = {
-  navigateTo: PropTypes.object,
+  navigation: PropTypes.object,
 };

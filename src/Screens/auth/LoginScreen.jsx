@@ -12,7 +12,7 @@ export default function LoginScreen({ navigation }) {
     <Background>
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <View style={styles.wrapper}>
-          <LoginForm navigateTo={navigation} />
+          <LoginForm navigation={navigation} />
         </View>
       </TouchableWithoutFeedback>
     </Background>

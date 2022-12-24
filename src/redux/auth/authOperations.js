@@ -2,10 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  updateCurrentUser,
   updateProfile,
-  onAuthStateChanged,
-  getAuth,
   signOut,
 } from "firebase/auth";
 
@@ -27,7 +24,7 @@ export const handleSignUp = createAsyncThunk(
 
       return { uid, displayName };
     } catch (error) {
-      console.log(error.message);
+      alert(error.message);
       return rejectWithValue(error.message);
     }
   }
@@ -37,12 +34,9 @@ export const handleSignIn = createAsyncThunk(
   "users/signin",
   async ({ email, password }, { rejectWithValue }) => {
     try {
-      // const { user } = await signInWithEmailAndPassword(auth, email, password);
       await signInWithEmailAndPassword(auth, email, password);
-      // return user;
     } catch (error) {
-      console.log(error.message);
-
+      alert(error.message);
       return rejectWithValue(error.message);
     }
   }
@@ -54,7 +48,7 @@ export const handleSignOut = createAsyncThunk(
     try {
       await signOut(auth);
     } catch (error) {
-      console.log(error.message);
+      alert(error.message);
       return rejectWithValue(error.message);
     }
   }
@@ -66,7 +60,7 @@ export const authStateChangeUser = createAsyncThunk(
     try {
       return data;
     } catch (error) {
-      console.log("error.message", error.message);
+      alert(error.message);
       return rejectWithValue(error.message);
     }
   }

@@ -1,16 +1,11 @@
 import { View, Text, StyleSheet, Image } from "react-native";
 
-import { useSelector } from "react-redux";
-
-import { getAuthSelector } from "../../../redux/auth/authSelectors";
-
 import { windowDimensions } from "../../../services";
+import PropTypes from "prop-types";
 
-export default function UserInfo() {
+export default function UserInfo({ nickname }) {
   const dimensions = windowDimensions();
-  const { user, avatar, name, email } = styles;
-
-  const userInfo = useSelector(getAuthSelector);
+  const { user, avatar, name } = styles;
 
   return (
     <View style={{ ...user, width: dimensions }}>
@@ -18,27 +13,23 @@ export default function UserInfo() {
         style={avatar}
         source={require("../../../../assets/Images/avatar.png")}
       />
-
-      <View>
-        <Text style={name}>{userInfo.nickname}</Text>
-        <Text style={email}>{userInfo.email}</Text>
-      </View>
+      <Text style={name}>{nickname}</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   user: {
-    marginBottom: 32,
+    marginBottom: 8,
     flexDirection: "row",
     alignItems: "center",
   },
   avatar: {
     marginRight: 8,
-    width: 60,
-    height: 60,
+    width: 35,
+    height: 35,
 
-    borderRadius: 16,
+    borderRadius: 50,
   },
   name: {
     fontFamily: "Roboto-Bold",
@@ -46,13 +37,6 @@ const styles = StyleSheet.create({
     fontSize: 13,
 
     color: "#212121",
-  },
-  email: {
-    fontFamily: "Roboto-Regular",
-    fontStyle: "normal",
-    fontSize: 11,
-
-    color: "rgba(33, 33, 33, 0.8)",
   },
 
   title: {
@@ -63,3 +47,7 @@ const styles = StyleSheet.create({
     color: "#212121",
   },
 });
+
+UserInfo.propTypes = {
+  nickname: PropTypes.string.isRequired,
+};

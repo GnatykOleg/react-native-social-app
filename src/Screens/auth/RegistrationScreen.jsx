@@ -12,7 +12,7 @@ export default function RegistrationScreen({ navigation }) {
     <Background>
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <View style={styles.wrapper}>
-          <RegisterForm navigateTo={navigation} />
+          <RegisterForm navigation={navigation} />
         </View>
       </TouchableWithoutFeedback>
     </Background>

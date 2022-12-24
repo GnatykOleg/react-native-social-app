@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
 
@@ -25,11 +25,10 @@ export default function Main() {
         dispatch(
           authStateChangeUser({ uid, displayName, email, stateChange: true })
         );
-      } else {
       }
     });
     return unsubscribe;
-  }, []);
+  }, [dispatch]);
 
   const routing = useRoute(stateChange);
 

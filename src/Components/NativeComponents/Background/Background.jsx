@@ -12,7 +12,7 @@ export default function Background({ children }) {
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <ImageBackground
         style={styles.image}
-        source={require("../../../assets/Images/bg.jpg")}
+        source={require("../../../../assets/Images/bg.jpg")}
       >
         {children}
       </ImageBackground>
@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
     flex: 1,
     resizeMode: "cover",
     justifyContent: "flex-end",
+    paddingTop: 147,
   },
 });
 

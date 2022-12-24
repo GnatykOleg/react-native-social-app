@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import {
-  handleSignIn,
   handleSignUp,
   authStateChangeUser,
   handleSignOut,
+  handleSignIn,
 } from "./authOperations";
 
 const initialState = {
@@ -41,22 +41,19 @@ export const authSlice = createSlice({
       store.loading = false;
     });
 
-    // Login
+    // SignIn
 
-    // builder.addCase(handleSignIn.pending, (store, action) => {
-    //   store.loading = true;
-    // });
-    // builder.addCase(handleSignIn.fulfilled, (store, action) => {
-    //   store.loading = false;
-    //   store.error = null;
-
-    //   store.nickname = action.payload.displayName;
-    //   store.userId = action.payload.uid;
-    // });
-    // builder.addCase(handleSignIn.rejected, (store, action) => {
-    //   store.error = action.payload;
-    //   store.loading = false;
-    // });
+    builder.addCase(handleSignIn.pending, (store, _) => {
+      store.loading = true;
+    });
+    builder.addCase(handleSignIn.fulfilled, (store, { payload }) => {
+      store.loading = false;
+      store.error = null;
+    });
+    builder.addCase(handleSignIn.rejected, (store, { payload }) => {
+      store.error = payload;
+      store.loading = false;
+    });
 
     // SignOut
 
@@ -76,7 +73,7 @@ export const authSlice = createSlice({
       store.loading = false;
     });
 
-    // ChangeUser
+    // Auth State Change
 
     builder.addCase(authStateChangeUser.pending, (store, _) => {
       store.loading = true;
@@ -100,7 +97,5 @@ export const authSlice = createSlice({
       store.error = payload;
       store.loading = false;
     });
-
-    // Auth State Change
   },
 });
