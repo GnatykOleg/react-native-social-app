@@ -1,3 +1,6 @@
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
 import {
   View,
   StyleSheet,
@@ -7,37 +10,43 @@ import {
   Text,
 } from "react-native";
 
-import { useSelector } from "react-redux";
-import { getAuthSelector } from "../../redux/auth/authSelectors";
-
-import { useDispatch } from "react-redux";
-
 import { handleSignOut } from "../../redux/auth/authOperations";
+import { getAuthSelector } from "../../redux/auth/authSelectors";
+import { getUserPosts } from "../../redux/posts/postsOperations";
+import { getPostsSelector } from "../../redux/posts/postsSelectors";
+import { useIsFocused } from "@react-navigation/native";
+import { Background, AvatarUpload, Post } from "../../Components";
 
 import { MaterialIcons } from "@expo/vector-icons";
 
-import { Background, Post } from "../../Components";
-
-import AvatarUpload from "../../Components/Auth/RegisterForm/AvatarUpload";
-
-export default function ProfileScreen({ route, navigation }) {
+export default function ProfileScreen({ navigation }) {
   const dispatch = useDispatch();
+  const isFocused = useIsFocused();
 
-  const { nickname } = useSelector(getAuthSelector);
+  const { nickname, userId } = useSelector(getAuthSelector);
+  const { userPosts } = useSelector(getPostsSelector);
+
+  const { wrapper, iconContainer, login } = styles;
+
+  useEffect(() => {
+    if (isFocused) {
+      dispatch(getUserPosts(userId));
+    }
+  }, [dispatch, isFocused, userId]);
 
   return (
     <Background>
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-        <View style={styles.wrapper}>
+        <View style={wrapper}>
           <AvatarUpload />
           <TouchableOpacity
-            style={styles.iconContainer}
+            style={iconContainer}
             onPress={() => dispatch(handleSignOut())}
           >
             <MaterialIcons name="logout" size={24} color="#BDBDBD" />
           </TouchableOpacity>
-          <Text style={styles.login}>{nickname}</Text>
-          <Post routeParams={route.params} navigateTo={navigation} />
+          <Text style={login}>{nickname}</Text>
+          <Post data={userPosts} navigation={navigation} />
         </View>
       </TouchableWithoutFeedback>
     </Background>
@@ -53,6 +62,7 @@ const styles = StyleSheet.create({
 
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
+    paddingBottom: 80,
   },
 
   iconContainer: {
@@ -68,5 +78,6 @@ const styles = StyleSheet.create({
     fontSize: 30,
 
     color: "#212121",
+    marginBottom: 16,
   },
 });

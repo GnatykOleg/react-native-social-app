@@ -15,11 +15,7 @@ export default function MapScreen({ route }) {
           longitudeDelta: 0.1,
         }}
       >
-        <Marker
-          coordinate={{ latitude, longitude }}
-          //   title="Поставить тайтл"
-          //   image={require("../../../assets/Images/gallery-image.jpg")}
-        />
+        <Marker coordinate={{ latitude, longitude }} />
       </MapView>
     </View>
   );
