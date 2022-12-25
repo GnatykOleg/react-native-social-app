@@ -11,5 +11,5 @@ export { default as Avatar } from "./Auth/Avatar/Avatar";
 export { default as CommentsForm } from "./Posts/Comments/CommentsForm";
 export { default as Comments } from "./Posts/Comments/Comments";
 export { default as CustomCamera } from "./NativeComponents/Camera/CustomCamera";
-
 export { default as CreatePostPhoto } from "./Posts/CreatePost/CreatePostPhoto";
+export { default as Loader } from "./NativeComponents/Loader/Loader";

@@ -3,14 +3,16 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { getAllPosts } from "../../redux/posts/postsOperations";
 import { getPostsSelector } from "../../redux/posts/postsSelectors";
+
 import { useIsFocused } from "@react-navigation/native";
 
 import { View, StyleSheet } from "react-native";
-import { Post } from "../../Components";
+
+import { Post, Loader } from "../../Components";
 export default function DefaultScreenPosts({ navigation }) {
   const dispatch = useDispatch();
 
-  const { allPosts } = useSelector(getPostsSelector);
+  const { allPosts, loading } = useSelector(getPostsSelector);
 
   const isFocused = useIsFocused();
 
@@ -19,6 +21,10 @@ export default function DefaultScreenPosts({ navigation }) {
       dispatch(getAllPosts());
     }
   }, [dispatch, isFocused]);
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <View style={styles.container}>

@@ -1,10 +1,5 @@
 import { useState } from "react";
-import {
-  TextInput,
-  StyleSheet,
-  KeyboardAvoidingView,
-  Platform,
-} from "react-native";
+import { TextInput, StyleSheet } from "react-native";
 
 import PropTypes from "prop-types";
 
@@ -46,9 +41,6 @@ export default function CustomTextInput({
       };
 
   return (
-    // <KeyboardAvoidingView
-    //   behavior={Platform.OS == "ios" ? "padding" : "height"}
-    // >
     <TextInput
       onChangeText={onChangeText}
       value={value}
@@ -59,7 +51,6 @@ export default function CustomTextInput({
       selectionColor="#FF6C00"
       secureTextEntry={secureTextEntry}
     />
-    // </KeyboardAvoidingView>
   );
 }
 

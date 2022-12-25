@@ -83,8 +83,6 @@ export default function CustomCamera({
   );
 }
 
-// удалить лишние стили
-
 const styles = StyleSheet.create({
   camera: {
     justifyContent: "center",

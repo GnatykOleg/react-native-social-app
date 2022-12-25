@@ -1,6 +1,6 @@
 import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 
-import { EvilIcons } from "@expo/vector-icons";
+import { EvilIcons, AntDesign } from "@expo/vector-icons";
 
 import PropTypes from "prop-types";
 
@@ -10,13 +10,20 @@ export default function CommentsAndLocationBlock({
   id,
   coordinations,
 }) {
-  const { comments, commentsText, location, locationText, description } =
-    styles;
+  const {
+    commentsText,
+
+    locationText,
+    description,
+
+    likesText,
+    iconContainer,
+  } = styles;
 
   return (
     <View style={description}>
       <TouchableOpacity
-        style={comments}
+        style={{ ...iconContainer, marginRight: 24 }}
         onPress={() =>
           navigation.navigate("Comments", {
             image: photo,
@@ -29,7 +36,15 @@ export default function CommentsAndLocationBlock({
       </TouchableOpacity>
 
       <TouchableOpacity
-        style={location}
+        style={{ ...iconContainer, minWidth: 50 }}
+        onPress={() => {}}
+      >
+        <AntDesign name="like2" size={20} color="#BDBDBD" />
+        <Text style={likesText}>Likes</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={{ ...iconContainer, marginLeft: "auto" }}
         onPress={() => navigation.navigate("Map", { coords: coordinations })}
       >
         <EvilIcons name="location" size={24} color="#BDBDBD" />
@@ -42,12 +57,13 @@ export default function CommentsAndLocationBlock({
 const styles = StyleSheet.create({
   description: {
     flexDirection: "row",
-    justifyContent: "space-between",
   },
 
-  comments: {
+  iconContainer: {
     flexDirection: "row",
     alignItems: "center",
+
+    justifyContent: "space-between",
   },
 
   commentsText: {
@@ -58,11 +74,6 @@ const styles = StyleSheet.create({
     color: "#BDBDBD",
   },
 
-  location: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-
   locationText: {
     fontFamily: "Roboto-Regular",
     fontStyle: "normal",
@@ -70,6 +81,14 @@ const styles = StyleSheet.create({
     textDecorationLine: "underline",
 
     color: "#212121",
+  },
+
+  likesText: {
+    fontFamily: "Roboto-Regular",
+    fontStyle: "normal",
+    fontSize: 16,
+
+    color: "#BDBDBD",
   },
 });
 
