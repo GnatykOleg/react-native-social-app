@@ -11,6 +11,7 @@ export default function DefaultScreenPosts({ navigation }) {
   const dispatch = useDispatch();
 
   const { allPosts } = useSelector(getPostsSelector);
+
   const isFocused = useIsFocused();
 
   useEffect(() => {

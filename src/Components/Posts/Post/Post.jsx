@@ -22,7 +22,7 @@ export default function Post({ navigation, data }) {
         renderItem={({ item }) => {
           return (
             <>
-              <UserInfo nickname={item.nickname} />
+              <UserInfo nickname={item.nickname} userAvatar={item.avatar} />
               <View style={post}>
                 <Image
                   style={{ height: 240, borderRadius: 8 }}

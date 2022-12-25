@@ -10,7 +10,7 @@ import ProfileScreen from "./ProfileScreen";
 import PostsScreen from "./PostsScreen";
 import CreatePostsScreen from "./CreatePostsScreen";
 
-export default function Home() {
+export default function Home({ navigation }) {
   const Tab = createBottomTabNavigator();
 
   return (
@@ -50,7 +50,12 @@ export default function Home() {
           tabBarStyle: { display: "none" },
           title: "Create Post",
           headerLeft: () => (
-            <TouchableOpacity style={{ paddingLeft: 10 }}>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.goBack();
+              }}
+              style={{ paddingLeft: 10 }}
+            >
               <AntDesign
                 name="arrowleft"
                 size={24}

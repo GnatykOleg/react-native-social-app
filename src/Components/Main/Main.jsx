@@ -21,9 +21,15 @@ export default function Main() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        const { uid, displayName, email } = user;
+        const { uid, displayName, email, photoURL } = user;
         dispatch(
-          authStateChangeUser({ uid, displayName, email, stateChange: true })
+          authStateChangeUser({
+            uid,
+            displayName,
+            email,
+            stateChange: true,
+            photoURL,
+          })
         );
       }
     });

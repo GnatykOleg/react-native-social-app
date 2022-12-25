@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { View, Text, StyleSheet } from "react-native";
 
@@ -10,8 +10,6 @@ import { windowDimensions, keyboardShow } from "../../../services";
 
 import { handleSignUp } from "../../../redux/auth/authOperations";
 
-import AvatarUpload from "../AvatarUpload/AvatarUpload";
-
 import PropTypes from "prop-types";
 
 import { isEmpty, isEmail } from "validator";
@@ -22,7 +20,7 @@ const initialState = {
   password: "",
 };
 
-export default function RegisterForm({ navigation }) {
+export default function RegisterForm({ navigation, photo }) {
   const [state, setState] = useState(initialState);
   const [secureTextEntry, setSecureTextEntry] = useState(true);
 
@@ -45,7 +43,7 @@ export default function RegisterForm({ navigation }) {
     } else if (isEmpty(password)) {
       return alert("Please type a password");
     } else {
-      dispatch(handleSignUp({ email, password, login }));
+      dispatch(handleSignUp({ email, password, login, photo }));
 
       setState(initialState);
     }
@@ -53,7 +51,6 @@ export default function RegisterForm({ navigation }) {
 
   return (
     <>
-      <AvatarUpload />
       <View
         style={{
           ...form,

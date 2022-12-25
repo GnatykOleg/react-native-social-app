@@ -3,16 +3,13 @@ import { View, Text, StyleSheet, Image } from "react-native";
 import { windowDimensions } from "../../../services";
 import PropTypes from "prop-types";
 
-export default function UserInfo({ nickname }) {
+export default function UserInfo({ nickname, userAvatar }) {
   const dimensions = windowDimensions();
   const { user, avatar, name } = styles;
 
   return (
     <View style={{ ...user, width: dimensions }}>
-      <Image
-        style={avatar}
-        source={require("../../../../assets/Images/avatar.png")}
-      />
+      <Image style={avatar} source={{ uri: userAvatar }} />
       <Text style={name}>{nickname}</Text>
     </View>
   );
@@ -50,4 +47,5 @@ const styles = StyleSheet.create({
 
 UserInfo.propTypes = {
   nickname: PropTypes.string.isRequired,
+  userAvatar: PropTypes.string.isRequired,
 };

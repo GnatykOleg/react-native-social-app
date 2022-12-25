@@ -1,3 +1,3 @@
 # Attention project under development !
 
-## React Native Social App
+## React Native Social App for Android

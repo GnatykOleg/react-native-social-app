@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     flex: 1,
     resizeMode: "cover",
     justifyContent: "flex-end",
-    paddingTop: 147,
+    paddingTop: 200,
   },
 });
 

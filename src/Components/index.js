@@ -7,6 +7,9 @@ export { default as LoginForm } from "./Auth/LoginForm/LoginForm";
 export { default as Post } from "./Posts/Post/Post";
 export { default as UserInfo } from "./Posts/Post/UserInfo";
 export { default as CreatePostForm } from "./Posts/CreatePost/CreatePostForm";
-export { default as AvatarUpload } from "./Auth/AvatarUpload/AvatarUpload";
+export { default as Avatar } from "./Auth/Avatar/Avatar";
 export { default as CommentsForm } from "./Posts/Comments/CommentsForm";
 export { default as Comments } from "./Posts/Comments/Comments";
+export { default as CustomCamera } from "./NativeComponents/Camera/CustomCamera";
+
+export { default as CreatePostPhoto } from "./Posts/CreatePost/CreatePostPhoto";

@@ -27,10 +27,7 @@ export default function Comments({ data }) {
           <>
             <View style={{ ...wrapper, width: dimensions }}>
               <View style={user}>
-                <Image
-                  style={image}
-                  source={require("../../../../assets/Images/avatar.png")}
-                />
+                <Image style={image} source={{ uri: item.avatar }} />
                 <Text style={text}>{item.nickname}</Text>
               </View>
               <View style={commentTextContainer}>

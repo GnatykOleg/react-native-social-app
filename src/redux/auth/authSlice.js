@@ -5,6 +5,7 @@ import {
   authStateChangeUser,
   handleSignOut,
   handleSignIn,
+  uploadAvatar,
 } from "./authOperations";
 
 const initialState = {
@@ -14,6 +15,7 @@ const initialState = {
   loading: false,
   error: null,
   stateChange: null,
+  avatar: null,
 };
 
 export const authSlice = createSlice({
@@ -29,10 +31,11 @@ export const authSlice = createSlice({
     });
     builder.addCase(
       handleSignUp.fulfilled,
-      (store, { payload: { displayName, uid } }) => {
+      (store, { payload: { displayName, uid, photoURL } }) => {
         store.loading = false;
         store.error = null;
         store.nickname = displayName;
+        store.avatar = photoURL;
         store.userId = uid;
       }
     );
@@ -83,7 +86,7 @@ export const authSlice = createSlice({
       (
         store,
 
-        { payload: { displayName, uid, stateChange, email } }
+        { payload: { displayName, uid, stateChange, email, photoURL } }
       ) => {
         store.loading = false;
         store.error = null;
@@ -91,9 +94,24 @@ export const authSlice = createSlice({
         store.userId = uid;
         store.stateChange = stateChange;
         store.email = email;
+        store.avatar = photoURL;
       }
     );
     builder.addCase(authStateChangeUser.rejected, (store, { payload }) => {
+      store.error = payload;
+      store.loading = false;
+    });
+
+    builder.addCase(uploadAvatar.pending, (store, _) => {
+      store.loading = true;
+    });
+    builder.addCase(uploadAvatar.fulfilled, (store, { payload }) => {
+      console.log("uploadAvatar payload", payload);
+      store.loading = false;
+      store.error = null;
+      store.avatar = payload;
+    });
+    builder.addCase(uploadAvatar.rejected, (store, { payload }) => {
       store.error = payload;
       store.loading = false;
     });
