@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { View, Text, StyleSheet } from "react-native";
 
@@ -129,5 +129,5 @@ const styles = StyleSheet.create({
 });
 
 RegisterForm.propTypes = {
-  navigation: PropTypes.object,
+  photo: PropTypes.string,
 };

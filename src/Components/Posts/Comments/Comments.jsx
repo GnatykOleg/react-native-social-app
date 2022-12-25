@@ -1,8 +1,9 @@
 import { Text, StyleSheet, View, Image, FlatList } from "react-native";
 
-import { windowDimensions, keyboardShow } from "../../../services";
+import { windowDimensions } from "../../../services";
+import { nanoid } from "@reduxjs/toolkit";
 
-// Proptypes
+import PropTypes from "prop-types";
 
 export default function Comments({ data }) {
   const dimensions = windowDimensions();
@@ -19,9 +20,7 @@ export default function Comments({ data }) {
     <FlatList
       style={{ maxHeight: 300 }}
       data={data}
-      key={(item, index) => {
-        index.toString();
-      }}
+      key={nanoid()}
       renderItem={({ item }) => {
         return (
           <>
@@ -94,3 +93,7 @@ const styles = StyleSheet.create({
     color: "#BDBDBD",
   },
 });
+
+Comments.propTypes = {
+  data: PropTypes.array,
+};

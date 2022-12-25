@@ -2,7 +2,10 @@ import { View, Image, Text, StyleSheet, FlatList } from "react-native";
 
 import { windowDimensions } from "../../../services";
 
+import { nanoid } from "@reduxjs/toolkit";
+
 import UserInfo from "./UserInfo";
+// import CommentsAndLocationBlock from "./CommentsAndLocationBlock";
 import CommentsAndLocationBlock from "./CommentsAndLocationBlock";
 
 import PropTypes from "prop-types";
@@ -16,9 +19,7 @@ export default function Post({ navigation, data }) {
     <View style={{ ...posts, width: dimensions }}>
       <FlatList
         data={data}
-        key={(item, index) => {
-          index.toString();
-        }}
+        key={nanoid()}
         renderItem={({ item }) => {
           return (
             <>

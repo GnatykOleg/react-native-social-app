@@ -23,7 +23,6 @@ const initialState = {
 };
 
 export default function CreatePostForm({ navigation, photo, changePhoto }) {
-  console.log("changePhoto", changePhoto);
   const [state, setState] = useState(initialState);
 
   const dimensions = windowDimensions();

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { uploadAvatar } from "../../redux/auth/authOperations";
 
@@ -32,7 +32,6 @@ export default function RegistrationScreen({ navigation }) {
     try {
       const { uri } = await snap.takePictureAsync();
       setShowCamera(false);
-
       setUserAvatar(uri);
     } catch (error) {
       console.log("error --->", error.message);
@@ -54,14 +53,15 @@ export default function RegistrationScreen({ navigation }) {
   const setDefaultAvatar = () => {
     dispatch(uploadAvatar(defaultAvatar));
     setUserAvatar(defaultAvatar);
-
     setAddPhoto(false);
   };
+
   return (
     <Background>
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <View style={styles.wrapper}>
           <Avatar
+            isRegistationScreen={true}
             setDefaultAvatar={setDefaultAvatar}
             photo={userAvatar}
             addPhoto={addPhoto}

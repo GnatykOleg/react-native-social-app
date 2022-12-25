@@ -1,10 +1,4 @@
-import {
-  View,
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
-  Image,
-} from "react-native";
+import { View, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
 import PropTypes from "prop-types";

@@ -83,19 +83,19 @@ export const postsSlice = createSlice({
     });
 
     // Create comment
-    // Что делать записывать ли коммментарий в стейт и что дальше
-    // builder.addCase(uploadPhoto.pending, (store, _) => {
-    //   store.loading = true;
-    // });
-    // builder.addCase(uploadPhoto.fulfilled, (store, { payload }) => {
 
-    //   store.loading = false;
-    //   store.error = null;
-    // });
-    // builder.addCase(uploadPhoto.rejected, (store, { payload }) => {
-    //   store.error = payload;
-    //   store.loading = false;
-    // });
+    builder.addCase(createComment.pending, (store, _) => {
+      store.loading = true;
+    });
+    builder.addCase(createComment.fulfilled, (store, { payload }) => {
+      store.photoLink = payload;
+      store.loading = false;
+      store.error = null;
+    });
+    builder.addCase(createComment.rejected, (store, { payload }) => {
+      store.error = payload;
+      store.loading = false;
+    });
 
     // Get All Comments
 

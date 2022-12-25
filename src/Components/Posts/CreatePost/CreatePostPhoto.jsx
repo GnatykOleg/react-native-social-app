@@ -7,7 +7,6 @@ import { windowDimensions } from "../../../services";
 export default function CreatePostPhoto({ photo, onPress }) {
   const dimensions = windowDimensions();
 
-  console.log("CreatePostPhoto photo", photo);
   const { changePhotoText, photoContainer } = styles;
 
   return (
@@ -40,4 +39,5 @@ const styles = StyleSheet.create({
 
 CreatePostPhoto.propTypes = {
   onPress: PropTypes.func.isRequired,
+  photo: PropTypes.string,
 };

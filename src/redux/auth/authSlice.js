@@ -106,7 +106,6 @@ export const authSlice = createSlice({
       store.loading = true;
     });
     builder.addCase(uploadAvatar.fulfilled, (store, { payload }) => {
-      console.log("uploadAvatar payload", payload);
       store.loading = false;
       store.error = null;
       store.avatar = payload;

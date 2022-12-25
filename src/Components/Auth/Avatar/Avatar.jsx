@@ -16,6 +16,7 @@ export default function Avatar({
   photo,
   addPhotoOnPress,
   deletePhotoOnPress,
+  isRegistationScreen = false,
 }) {
   const { avatar, deleteCross, addCross } = styles;
 
@@ -28,9 +29,11 @@ export default function Avatar({
               <AntDesign name="pluscircleo" size={25} color="#FF6C00" />
             </TouchableOpacity>
           </View>
-          <View style={{ marginBottom: 5 }}>
-            <Button onPress={setDefaultAvatar} title="Set Default Avatar" />
-          </View>
+          {!isRegistationScreen && (
+            <View style={{ marginBottom: 5 }}>
+              <Button onPress={setDefaultAvatar} title="Set Default Avatar" />
+            </View>
+          )}
         </>
       )}
 
@@ -94,4 +97,5 @@ Avatar.propTypes = {
   photo: PropTypes.string,
   addPhotoOnPress: PropTypes.func,
   deletePhotoOnPress: PropTypes.func,
+  isRegistationScreen: PropTypes.bool,
 };

@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import {
   View,
   StyleSheet,
@@ -18,7 +19,6 @@ export default function CreatePostsScreen({ navigation }) {
   const [photo, setPhoto] = useState(null);
   const [snap, setSnap] = useState(null);
   const [showCamera, setShowCamera] = useState(true);
-  console.log("CreatePostsScreen photo", photo);
 
   const isShowKeyboard = keyboardShow();
 

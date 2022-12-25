@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+
 import { StyleSheet, View, Image } from "react-native";
 
 import { getAuthSelector } from "../../redux/auth/authSelectors";
@@ -12,7 +13,7 @@ import { getPostsSelector } from "../../redux/posts/postsSelectors";
 
 import { windowDimensions, keyboardShow } from "../../services";
 
-import { CommentsForm, Comments } from "../../Components";
+import { CommentsForm, Comments, Loader } from "../../Components";
 
 export default function CommentsScreen({ route }) {
   const [comment, setComment] = useState("");
@@ -20,7 +21,7 @@ export default function CommentsScreen({ route }) {
   const { image, postId } = route.params;
   const { nickname, avatar } = useSelector(getAuthSelector);
 
-  const { postComments } = useSelector(getPostsSelector);
+  const { postComments, loading } = useSelector(getPostsSelector);
 
   const dispatch = useDispatch();
   const dimensions = windowDimensions();
@@ -34,6 +35,10 @@ export default function CommentsScreen({ route }) {
   useEffect(() => {
     dispatch(getPostComments({ postId }));
   }, [dispatch]);
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <View

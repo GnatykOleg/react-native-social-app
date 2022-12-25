@@ -16,7 +16,14 @@ import { getAuthSelector } from "../../redux/auth/authSelectors";
 import { getUserPosts } from "../../redux/posts/postsOperations";
 import { getPostsSelector } from "../../redux/posts/postsSelectors";
 import { useIsFocused } from "@react-navigation/native";
-import { Background, Avatar, Post, CustomCamera } from "../../Components";
+
+import {
+  Background,
+  Avatar,
+  Post,
+  CustomCamera,
+  Loader,
+} from "../../Components";
 
 import { MaterialIcons } from "@expo/vector-icons";
 
@@ -35,7 +42,7 @@ export default function ProfileScreen({ navigation }) {
   const defaultAvatar =
     "https://as1.ftcdn.net/v2/jpg/03/53/11/00/1000_F_353110097_nbpmfn9iHlxef4EDIhXB1tdTD0lcWhG9.jpg";
 
-  const { userPosts } = useSelector(getPostsSelector);
+  const { userPosts, loading } = useSelector(getPostsSelector);
 
   const { wrapper, iconContainer, login } = styles;
 
@@ -65,7 +72,7 @@ export default function ProfileScreen({ navigation }) {
   };
 
   const setDefaultAvatar = () => {
-    dispatch(uploadAvatar(defaultAvatar));
+    dispatch(uploadAvatar());
     setUserAvatar(defaultAvatar);
     setConfirm(false);
     setAddPhoto(false);
@@ -76,6 +83,10 @@ export default function ProfileScreen({ navigation }) {
       dispatch(getUserPosts(userId));
     }
   }, [dispatch, isFocused, userId]);
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <Background>
