@@ -1,7 +1,8 @@
 {
   "expo": {
-    "name": "react-native-social-app",
-    "slug": "react-native-social-app",
+    "name": "React Native Social App",
+    "description": "This is an Social App",
+    "slug": "React-Native-Social-App",
     "version": "1.0.0",
     "orientation": "default",
     "icon": "./assets/icon.png",
@@ -14,9 +15,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
