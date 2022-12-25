@@ -37,6 +37,6 @@ const styles = StyleSheet.create({
 PrimaryButton.propTypes = {
   onPress: PropTypes.func.isRequired,
   text: PropTypes.string.isRequired,
-  bgColor: PropTypes.string,
-  textColor: PropTypes.string,
+  bgColor: PropTypes.string.isRequired,
+  textColor: PropTypes.string.isRequired,
 };

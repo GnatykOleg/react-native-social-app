@@ -6,7 +6,15 @@ export const useRoute = (isAuth) => {
   const Stack = createNativeStackNavigator();
 
   if (isAuth) {
-    return <Home />;
+    return (
+      <Stack.Navigator>
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Home"
+          component={Home}
+        />
+      </Stack.Navigator>
+    );
   }
 
   return (

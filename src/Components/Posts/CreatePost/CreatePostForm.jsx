@@ -22,7 +22,8 @@ const initialState = {
   location: null,
 };
 
-export default function CreatePostForm({ navigation, photo }) {
+export default function CreatePostForm({ navigation, photo, changePhoto }) {
+  console.log("changePhoto", changePhoto);
   const [state, setState] = useState(initialState);
 
   const dimensions = windowDimensions();
@@ -32,7 +33,7 @@ export default function CreatePostForm({ navigation, photo }) {
   const { name, location } = state;
   const { form, iconContainer } = styles;
 
-  const { userId, nickname, email } = useSelector(getAuthSelector);
+  const { userId, nickname, email, avatar } = useSelector(getAuthSelector);
 
   const isDataBgColor = name ? "#FF6C00" : "#F6F6F6";
   const isDataTextColor = name ? "#FFF" : "#BDBDBD";
@@ -61,8 +62,12 @@ export default function CreatePostForm({ navigation, photo }) {
   const sendPhoto = () => {
     if (!name) {
       return alert(`Name is required`);
+    } else if (!photo) {
+      return alert(`Photo is required`);
     } else {
       setState(initialState);
+
+      changePhoto;
 
       dispatch(
         createPost({
@@ -72,9 +77,12 @@ export default function CreatePostForm({ navigation, photo }) {
           userId,
           name,
           coords: coordinations,
+          avatar,
         })
       );
+
       navigation.navigate("Posts");
+      changePhoto();
     }
   };
 
@@ -126,5 +134,6 @@ const styles = StyleSheet.create({
 });
 
 CreatePostForm.propTypes = {
-  navigateTo: PropTypes.object,
+  navigation: PropTypes.object,
+  changePhoto: PropTypes.func,
 };

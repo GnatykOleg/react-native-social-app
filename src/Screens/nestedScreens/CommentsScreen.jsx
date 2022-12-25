@@ -18,7 +18,7 @@ export default function CommentsScreen({ route }) {
   const [comment, setComment] = useState("");
 
   const { image, postId } = route.params;
-  const { nickname } = useSelector(getAuthSelector);
+  const { nickname, avatar } = useSelector(getAuthSelector);
 
   const { postComments } = useSelector(getPostsSelector);
 
@@ -27,7 +27,7 @@ export default function CommentsScreen({ route }) {
   const isShowKeyboard = keyboardShow();
 
   const addComment = () => {
-    dispatch(createComment({ nickname, postId, comment }));
+    dispatch(createComment({ nickname, postId, comment, avatar }));
     setComment("");
   };
 

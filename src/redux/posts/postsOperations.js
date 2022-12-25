@@ -12,10 +12,35 @@ import {
 } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
+export const uploadPhoto = createAsyncThunk(
+  "posts/uploadPhoto",
+  async (photo, { rejectWithValue }) => {
+    try {
+      const response = await fetch(photo);
+
+      const file = await response.blob();
+
+      const uniquePostId = Date.now().toString();
+
+      const storageRef = ref(storage, `postImage/${uniquePostId}`);
+
+      await uploadBytes(storageRef, file);
+
+      const processedPhoto = await getDownloadURL(
+        ref(storage, `postImage/${uniquePostId}`)
+      );
+      return processedPhoto;
+    } catch (error) {
+      alert(error.message);
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 export const createPost = createAsyncThunk(
   "posts/createPost",
   async (
-    { photo, nickname, email, userId, name, coords },
+    { photo, nickname, email, userId, name, coords, avatar },
     { rejectWithValue, dispatch }
   ) => {
     try {
@@ -30,6 +55,7 @@ export const createPost = createAsyncThunk(
         userId,
         nickname,
         email,
+        avatar,
       });
 
       await dispatch(getAllPosts());
@@ -86,46 +112,24 @@ export const getUserPosts = createAsyncThunk(
   }
 );
 
-export const uploadPhoto = createAsyncThunk(
-  "posts/uploadPhoto",
-  async (photo, { rejectWithValue }) => {
-    try {
-      const response = await fetch(photo);
-
-      const file = await response.blob();
-
-      const uniquePostId = Date.now().toString();
-
-      const storageRef = ref(storage, `postImage/${uniquePostId}`);
-
-      await uploadBytes(storageRef, file);
-
-      const processedPhoto = await getDownloadURL(
-        ref(storage, `postImage/${uniquePostId}`)
-      );
-      return processedPhoto;
-    } catch (error) {
-      alert(error.message);
-      return rejectWithValue(error.message);
-    }
-  }
-);
-
 export const createComment = createAsyncThunk(
   "posts/createComment",
-  async ({ postId, comment, nickname }, { rejectWithValue, dispatch }) => {
+  async (
+    { postId, comment, nickname, avatar },
+    { rejectWithValue, dispatch }
+  ) => {
     try {
       const docRef = doc(firestore, "posts", postId);
 
       const today = new Date();
 
       const dateCreate = today.toLocaleString().slice(0, -3);
-      console.log("dateCreate", dateCreate);
 
       await addDoc(collection(docRef, "comments"), {
         comment,
         nickname,
         dateCreate,
+        avatar,
       });
 
       await dispatch(getPostComments({ postId }));
