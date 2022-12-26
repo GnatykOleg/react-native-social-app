@@ -41,7 +41,7 @@
 - Pressing the location button takes the user to a sub-screen of the Map Screen showing the location of the photo.
 - There is a user logout button
 
-  <img src="./assets/screenshots/postsScreen.jpg" alt="PostsScreen" width="300"/>
+  <img src="./assets/screenshots/posts.jpg" alt="PostsScreen" width="300"/>
   <img src="./assets/screenshots/commentsScreen.jpg" alt="Comments" width="300"/>
   <img src="./assets/screenshots/map-screen.jpg" alt="Map" width="300"/>
 
