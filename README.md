@@ -1,6 +1,6 @@
 # React Native Social App for Android
 
-## Technologies used :
+## Technologies used:
 
 - JavaScript
 - React Navite Expo
