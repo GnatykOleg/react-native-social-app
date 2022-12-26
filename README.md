@@ -61,4 +61,4 @@
 - Here is the user exit button, avatar (with the ability to change the avatar, as well as the ability to set the default avatar)
   and user posts.
 
-  <img src="./assets/screenshots/profileScreen.jpg" alt="ProfileScreen" width="300"/>
+  <img src="./assets/screenshots/profile.jpg" alt="ProfileScreen" width="300"/>
