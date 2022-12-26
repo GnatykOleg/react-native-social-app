@@ -35,13 +35,13 @@ export default function CommentsAndLocationBlock({
         <Text style={commentsText}>Comments</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity
+      {/* <TouchableOpacity
         style={{ ...iconContainer, minWidth: 50 }}
         onPress={() => {}}
       >
         <AntDesign name="like2" size={20} color="#BDBDBD" />
         <Text style={likesText}>Likes</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
       <TouchableOpacity
         style={{ ...iconContainer, marginLeft: "auto" }}

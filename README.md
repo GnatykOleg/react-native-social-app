@@ -18,7 +18,6 @@
   <img src="./assets/screenshots/login.jpg" alt="login" width="300"/>
   <img src="./assets/screenshots/login-second.jpg" alt="SignIn-Camera" width="300"/>
 
-
 ### Sign up Screen
 
 - Hover over the selected input.
@@ -28,7 +27,7 @@
 - Add avatar camera window, an optional field by default the user will get an avatar.
 - When you click on the plus, the camera will open. A button to take a picture and a flip camera button are available. Once the picture is taken, a cross icon is available that will reset the avatar box to its original state.
 - After confirming the registration, the user goes to the Home component, where Tab Navigation is available (Posts by default, Create Posts Screen, Profile Screen)
-  
+
   <img src="./assets/screenshots/registration.jpg" alt="SignUp" width="300"/>
   <img src="./assets/screenshots/registation-camera.jpg" alt="SignIn-Camera" width="300"/>
   <img src="./assets/screenshots/registration-delete.jpg" alt="SignIn-Delete" width="300"/>
@@ -49,8 +48,8 @@
 ### Create Posts Screen
 
 - When first entering the screen, the user will be asked for permission to access the camera and geolocation.
-- The screen displays a camera with the ability to flip the camera, the name, and location fields (the location field is not a required field)
-- There is data validation required data is a photo and name (location field is not a required field)
+- The screen displays a camera with the ability to flip the camera, and field name.
+- There is data validation required data is a photo and name.
 - After the picture is taken, the inscription to change the photo appears.
 - After clicking on the publish button, the user is transferred to the Posts Screen
 
@@ -63,4 +62,3 @@
   and user posts.
 
   <img src="./assets/screenshots/profile-screen.jpg" alt="ProfileScreen" width="300"/>
-

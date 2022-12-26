@@ -102,7 +102,7 @@ export default function CreatePostForm({ navigation, photo, changePhoto }) {
       />
 
       <View>
-        <CustomTextInput
+        {/* <CustomTextInput
           paddingLeft={28}
           isPrimaryInput={false}
           onChangeText={(value) => {
@@ -111,7 +111,7 @@ export default function CreatePostForm({ navigation, photo, changePhoto }) {
           value={location}
           placeholder="Location..."
           marginBottom={32}
-        />
+        /> */}
         <View style={iconContainer}>
           <EvilIcons name="location" size={24} color="#BDBDBD" />
         </View>
